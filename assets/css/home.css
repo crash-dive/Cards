@@ -1,0 +1,119 @@
+@font-face {
+    font-family: caveat;
+    src: url(../fonts/caveat.ttf) format("truetype");
+    font-display: swap;
+}
+
+#welcome-and-intro {
+    border: 4px solid black;
+    box-shadow: 10px 10px 0px 0px black;
+    background-color: white;
+    margin: 40px 0 0 10px;
+    width: 50%;
+    font-family: var(--courier);
+}
+
+    #welcome-and-intro h3 {
+        font-size: 4em;
+        margin: 10px;
+        border-bottom: 1px dashed black;
+    }
+
+    #welcome-and-intro a {
+        color: var(--red);
+        font-weight: bold;
+    }
+
+    #welcome-and-intro a:hover {
+        color: var(--blue);
+    }
+
+    #welcome-and-intro .intro {
+        font-size: 1.5em;
+        margin: 0 10px 10px;
+    }
+
+    #welcome-and-intro .small-print {
+        font-size: 1em;
+        margin: 0 10px 10px;
+    }
+
+    #deck-comment {
+        width: 50%;
+        margin: 40px 0 0 0;
+    }
+
+        #large-comment {
+            font-family: caveat;
+            font-size: 4em;
+            text-align: center;
+            margin: 0;
+        }
+
+        #small-comment {
+            font-family: caveat;
+            font-size: 1em;
+            text-align: center;
+            margin: 0;
+        }
+
+    #card-on-table {
+        position: fixed;
+        top: 15%;
+        left: 65%;
+        height:400px;
+        transform: rotateX(59deg) rotateZ(40deg);
+        box-shadow: 15px 15px 2px #000000a8;;
+        backface-visibility: hidden;  /* Removes jagged borders in Chrome */
+        background: black;  /* Removes transparant corners caused by box shadow */
+        border-radius: 10px; /* Rounds the box shadow */
+    }
+
+    #card-hand {
+        position: fixed;
+        width: 40%;
+        top: 60%;
+        left: 60%;
+    }
+
+    #card-hand img {
+        position: absolute;
+        height:400px;
+        backface-visibility: hidden; /* Removes jagged boarders in Chrome */
+        border-radius: 10px; /* Rounds the box shadow */
+    }
+
+        #card-hand-1 {
+            transform: rotate(-15deg);
+            top: 25%;
+            left: 0;
+            z-index: 1;
+            box-shadow: -10px 15px 2px #000000a8;
+        }
+
+        #card-hand-2 {
+            transform: rotate(-5deg);
+            left: 5%;
+            z-index: 2;
+        }
+
+        #card-hand-3 {
+            transform: rotate(5deg);
+            left: 15%;
+            z-index: 3;
+        }
+
+        #card-hand-4 {
+            transform: rotate(15deg);
+            left: 25%;
+            z-index: 4;
+            box-shadow: 10px 15px 2px #000000a8;
+        }
+
+@media (max-width: 1023px) {
+
+}
+
+@media (min-width: 1024px) {
+
+}

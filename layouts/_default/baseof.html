@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="Description" content="{{ .Description }}" />
+
+        <title>{{ .Page.Title }}</title>
+
+        {{ $faviconAppleTouch := resources.Get "/favicon-apple-touch.png" }}
+        {{ $favicon32 := resources.Get "/favicon-32x32.png" }}
+        {{ $favicon16 := resources.Get "/favicon-16x16.png" }}
+        {{ $favicon := resources.Get "/favicon.ico" }}
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ $faviconAppleTouch.RelPermalink }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.RelPermalink }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon16.RelPermalink }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ $favicon.RelPermalink }}" />
+
+        {{ $caveatFont := resources.Get "fonts/caveat.ttf" }}
+        {{ $comicPanelsFont := resources.Get "fonts/comic-panels.ttf" }}
+        <link href="{{ $comicPanelsFont.RelPermalink }}" rel="preload" as="font" type="font/ttf" crossorigin="anonymous">
+        <link href="{{ $caveatFont.RelPermalink }}" rel="preload" as="font" type="font/ttf" crossorigin="anonymous">
+        
+        {{ $baseCss := resources.Get "css/base.css" | minify | fingerprint "sha512" }}
+        <link href="{{ $baseCss.RelPermalink }}" rel="stylesheet" integrity="{{ $baseCss.Data.Integrity }}" crossorigin="anonymous" />
+
+        {{ range .Params.css }}
+            {{ $pageCss := resources.Get (print "css/" . ".css") | minify | fingerprint "sha512" }}
+            <link href="{{ $pageCss.RelPermalink }}" rel="stylesheet" integrity="{{ $pageCss.Data.Integrity }}" crossorigin="anonymous" />
+        {{ end }}
+
+        {{ $navMenuJs := resources.Get "js/nav-menu.js" | minify | fingerprint "sha512" }}
+        <script src="{{ $navMenuJs.RelPermalink }}" defer integrity="{{ $navMenuJs.Data.Integrity }}"></script>
+        {{ if isset .Params "js" }} 
+            {{ range .Params.js }}
+                {{ $js := resources.Get (print "js/" . ".js") | minify | fingerprint "sha512" }}
+                <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+            {{ end }}
+        {{ end }}
+    </head>
+    <body>
+        <header>
+            <a id="header-tagline" href="/">
+                <h1>Crash Dive Trading</h1>
+                <p>Trade cards with me!</p>
+            </a>
+            <nav id="nav-menu">
+                <a href="/" {{ if .IsHome }} class="current-page" {{ end }}>Home</a>
+                <a href="/cards" {{ if eq .RelPermalink "/cards/" }} class="current-page" {{ end }}>Cards</a>
+                <a href="/about" {{ if eq .RelPermalink "/about/" }} class="current-page" {{ end }}>About</a>
+                <a href="/contact" {{ if eq .RelPermalink "/contact/" }} class="current-page" {{ end }}>Contact</a>
+            </nav>
+            <button id="nav-button" class="is-closed" type="button" aria-label="Opens navigation menu">
+                <div class="nav-button-line" id="nav-button-line-top"></div>
+                <div class="nav-button-line" id="nav-button-line-mid"></div>
+                <div class="nav-button-line" id="nav-button-line-bot"></div>
+            </button>
+        </header>
+        <main>
+            {{ block "main" . }}
+                {{ .Content }}
+            {{ end }}
+        </main>
+    </body>
+</html>
