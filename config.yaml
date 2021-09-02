@@ -1,0 +1,8 @@
+baseURL: "http://trade.crashdive.co.uk/"
+title: "Crash Dive - Trade"
+languageCode: "en-GB"
+disableKinds: ["taxonomy", "taxonomyTerm", "RSS"]
+enableRobotsTXT: true
+disableHugoGeneratorInject: true
+sitemap:
+    changefreq: monthly
