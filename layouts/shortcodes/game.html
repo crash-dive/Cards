@@ -1,0 +1,11 @@
+{{ $name:= .Get "name" }}
+{{ $path:= .Get "path" }}
+{{ $src:= printf "images/card/%s.jpg" $path }}
+{{ $file := resources.Get $src }}
+
+<li>
+    <a href="/cards/{{ $path }}" title="{{ $name }}">
+        <img id="" src="{{ $file.RelPermalink }}" alt="Card back for {{ $name }} card game" />
+        <h2>{{ $name }}</h2>
+    </a>
+</li>
