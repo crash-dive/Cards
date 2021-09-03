@@ -1,3 +1,9 @@
+:root {
+    --card-height-mobile: 200px;
+    --card-height-half-mobile: -100px;
+    --card-height-desktop: 400px;
+}
+
 @font-face {
     font-family: caveat;
     src: url(../fonts/caveat.ttf) format("truetype");
@@ -9,7 +15,6 @@
     box-shadow: 10px 10px 0px 0px black;
     background-color: white;
     margin: 40px 0 0 10px;
-    width: 50%;
     font-family: var(--courier);
 }
 
@@ -38,6 +43,91 @@
         margin: 0 10px 10px;
     }
 
+    #card-on-table {
+        transform: rotateX(59deg) rotateZ(40deg);
+        box-shadow: 15px 15px 2px #000000a8;;
+        backface-visibility: hidden;  /* Removes jagged borders in Chrome */
+        background: black;  /* Removes transparant corners caused by box shadow */
+        border-radius: 10px; /* Rounds the box shadow */
+    }
+
+    #card-hand img {
+        backface-visibility: hidden; /* Removes jagged boarders in Chrome */
+        border-radius: 10px; /* Rounds the box shadow */
+    }
+
+        #card-hand-1 {
+            transform: rotate(-15deg);
+            box-shadow: -10px 15px 2px #000000a8;
+        }
+
+        #card-hand-2 {
+            transform: rotate(-5deg);
+        }
+
+        #card-hand-3 {
+            transform: rotate(5deg);
+        }
+
+        #card-hand-4 {
+            transform: rotate(15deg);
+            box-shadow: 10px 15px 2px #000000a8;
+        }
+
+@media (max-width: 1023px) {
+    #welcome-and-intro {
+        margin-right: 10px;
+    }
+
+    #deck-comment {
+        display: none;
+    }
+
+    #card-on-table {
+        height: var(--card-height-mobile);
+        display: block;
+        margin: 0 auto;
+    }
+
+    #card-hand {
+        margin: 0 auto -50px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+        #card-hand img {
+            height: var(--card-height-mobile);
+            margin-left: var(--card-height-half-mobile);
+        }
+
+        #card-hand img:first-child {
+            margin-left: 0;
+            margin-bottom: -20px;
+        }
+
+        #card-hand img:last-child {
+            margin-bottom: -20px;
+        }
+
+        #welcome-and-intro {
+            z-index: 5;
+            position: relative;
+        }
+}
+
+@media (min-width: 1024px) {
+    #welcome-and-intro {
+        width: 50%;
+    }
+    
+    #card-on-table {
+        height: var(--card-height-desktop);
+        position: fixed;
+        top: 15%;
+        left: 65%;
+    }
+
     #deck-comment {
         width: 50%;
         margin: 40px 0 0 0;
@@ -57,18 +147,6 @@
             margin: 0;
         }
 
-    #card-on-table {
-        position: fixed;
-        top: 15%;
-        left: 65%;
-        height:400px;
-        transform: rotateX(59deg) rotateZ(40deg);
-        box-shadow: 15px 15px 2px #000000a8;;
-        backface-visibility: hidden;  /* Removes jagged borders in Chrome */
-        background: black;  /* Removes transparant corners caused by box shadow */
-        border-radius: 10px; /* Rounds the box shadow */
-    }
-
     #card-hand {
         position: fixed;
         width: 40%;
@@ -76,44 +154,24 @@
         left: 60%;
     }
 
-    #card-hand img {
-        position: absolute;
-        height:400px;
-        backface-visibility: hidden; /* Removes jagged boarders in Chrome */
-        border-radius: 10px; /* Rounds the box shadow */
-    }
+        #card-hand img {
+            height: var(--card-height-desktop);
+            position: absolute;
+        }
 
         #card-hand-1 {
-            transform: rotate(-15deg);
-            top: 25%;
             left: 0;
-            z-index: 1;
-            box-shadow: -10px 15px 2px #000000a8;
         }
 
         #card-hand-2 {
-            transform: rotate(-5deg);
             left: 5%;
-            z-index: 2;
         }
 
         #card-hand-3 {
-            transform: rotate(5deg);
             left: 15%;
-            z-index: 3;
         }
 
         #card-hand-4 {
-            transform: rotate(15deg);
             left: 25%;
-            z-index: 4;
-            box-shadow: 10px 15px 2px #000000a8;
         }
-
-@media (max-width: 1023px) {
-
-}
-
-@media (min-width: 1024px) {
-
 }

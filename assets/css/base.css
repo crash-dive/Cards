@@ -38,20 +38,20 @@ body {
 }
 
 header {
+    display: flex;
     font-family: var(--comic-panels);
-    overflow: auto;
+}
+
+#header-box {
+    padding: 10px 20px;
+    border: 4px solid black;
+    box-shadow: 10px 10px 0px 0px black;
+    background-color: white;
+    margin: 10px 20px 0 10px;
     display: flex;
 }
 
-    #header-tagline {
-        margin: 10px;
-        padding: 10px 20px;
-        border: 4px solid black;
-        box-shadow: 10px 10px 0px 0px black;
-        background-color: white;
-    }
-
-    header h1 {
+    #header-box h1 {
         color: var(--blue);
         margin: 0;
     }
@@ -62,27 +62,94 @@ header {
     }
 
 @media (max-width: 1023px) {
-    #nav-menu {
-        width: 100%;
-        padding: 50px 5% 0 0;
-        clip-path: polygon(0 0, 0 30%, 20% 69%, 110% 100%, 100% 100%, 100% 0);
-    }
+        #nav-button {
+            position: relative;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            background-color: transparent;
+            z-index: 20;
+            width: 40px;
+            height: 24px;
+        }
+        
+            .nav-button-line {
+                position: absolute;
+                width: 40px;
+                height: 4px;
+                border-radius: 4px;
+                background-color: black;
+                display: block;
+                transform: translate(0, 0) rotate(0);
+                transition: 
+                    top .25s ease 0s,
+                    transform .25s ease .25s; 
+            }
+        
+                #nav-button-line-top {
+                    top: 0; 
+                    transform-origin: bottom left;
+                }
+        
+                #nav-button-line-mid {
+                    top: 10px;
+                    transform-origin: bottom right;
+                }
+                
+                #nav-button-line-bot {
+                    top: 20px;
+                    transform-origin: bottom right;
+                }
+        
+                    #nav-button:hover .nav-button-line {
+                        background-color: var(--blue);
+                    }
+    
+                    #nav-button.is-open .nav-button-line {
+                        background-color: white;
+                    }
+                
+                #nav-button:hover.is-open .nav-button-line {
+                    background-color: black;
+                }
+                
+                #nav-button.is-open .nav-button-line {
+                    top: 20px;
+                }
+        
+                #nav-button.is-closed .nav-button-line {
+                    transition: 
+                        top .25s ease .25s,
+                        transform .25s ease 0s; 
+                }
+        
+                    #nav-button.is-open #nav-button-line-top {
+                        transform: translate(7px, 0) rotate(-45deg);
+                        transform-origin: bottom left;
+                    }
+        
+                    #nav-button.is-open #nav-button-line-bot,
+                    #nav-button.is-open #nav-button-line-mid {
+                        transform: translate(-7px, 0) rotate(45deg);
+                        transform-origin: bottom right;
+                    }
 
     #nav-menu {
-        position: fixed;
-        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        right: -100%;
         top: 0;
-        right:0;
-        min-height: 100%;
+        padding: 50px 5% 0 0;
+        position: fixed;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         transition: 300ms right cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 10;
-        border-left: 5px solid black;
+        border: 5px solid black;
         background: var(--dark-blue);
         padding-top: 60px;
-        right: -100%;
     }
     
         #nav-menu.is-open,
@@ -99,81 +166,6 @@ header {
         #nav-menu > a:hover {
             color: black;
         }
-
-    #nav-button {
-        position: absolute;
-        top :2%;
-        right: 1%;
-        border: 0;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-        background-color: transparent;
-        z-index: 20;
-        width: 40px;
-        height: 24px;
-    }
-    
-        .nav-button-line {
-            position: absolute;
-            width: 40px;
-            height: 4px;
-            border-radius: 4px;
-            background-color: black;
-            display: block;
-            transform: translate(0, 0) rotate(0);
-            transition: 
-                top .25s ease 0s,
-                transform .25s ease .25s; 
-        }
-    
-            #nav-button-line-top {
-                top: 0; 
-                transform-origin: bottom left;
-            }
-    
-            #nav-button-line-mid {
-                top: 10px;
-                transform-origin: bottom right;
-            }
-            
-            #nav-button-line-bot {
-                top: 20px;
-                transform-origin: bottom right;
-            }
-    
-                #nav-button:hover .nav-button-line {
-                    background-color: var(--blue);
-                }
-
-                #nav-button.is-open .nav-button-line {
-                    background-color: white;
-                }
-            
-            #nav-button:hover.is-open .nav-button-line {
-                background-color: black;
-            }
-            
-            #nav-button.is-open .nav-button-line {
-                top: 20px;
-            }
-    
-            #nav-button.is-closed .nav-button-line {
-                transition: 
-                    top .25s ease .25s,
-                    transform .25s ease 0s; 
-            }
-    
-                #nav-button.is-open #nav-button-line-top {
-                    transform: translate(7px, 0) rotate(-45deg);
-                    transform-origin: bottom left;
-                }
-    
-                #nav-button.is-open #nav-button-line-bot,
-                #nav-button.is-open #nav-button-line-mid {
-                    transform: translate(-7px, 0) rotate(45deg);
-                    transform-origin: bottom right;
-                }
 }
 
 @media (min-width: 1024px) {
@@ -182,6 +174,7 @@ header {
         display: flex;
         align-items: center;
         font-size: 2em;
+        margin-top: 14px
     }
 
         #nav-menu a {

@@ -40,21 +40,23 @@
     </head>
     <body>
         <header>
-            <a id="header-tagline" href="/">
-                <h1>Crash Dive Trading</h1>
-                <p>Trade cards with me!</p>
-            </a>
+            <div id="header-box">
+                <div>
+                    <h1>Crash Dive Trading</h1>
+                    <p>Trade cards with me!</p>
+                </div>
+                <button id="nav-button" class="is-closed" type="button" aria-label="Opens navigation menu">
+                    <div class="nav-button-line" id="nav-button-line-top"></div>
+                    <div class="nav-button-line" id="nav-button-line-mid"></div>
+                    <div class="nav-button-line" id="nav-button-line-bot"></div>
+                </button>
+            </div>
             <nav id="nav-menu">
                 <a href="/" {{ if .IsHome }} class="current-page" {{ end }}>Home</a>
                 <a href="/cards" {{ if eq .RelPermalink "/cards/" }} class="current-page" {{ end }}>Cards</a>
                 <a href="/about" {{ if eq .RelPermalink "/about/" }} class="current-page" {{ end }}>About</a>
                 <a href="/contact" {{ if eq .RelPermalink "/contact/" }} class="current-page" {{ end }}>Contact</a>
             </nav>
-            <button id="nav-button" class="is-closed" type="button" aria-label="Opens navigation menu">
-                <div class="nav-button-line" id="nav-button-line-top"></div>
-                <div class="nav-button-line" id="nav-button-line-mid"></div>
-                <div class="nav-button-line" id="nav-button-line-bot"></div>
-            </button>
         </header>
         <main>
             {{ block "main" . }}
