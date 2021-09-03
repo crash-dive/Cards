@@ -161,6 +161,7 @@ header {
             font-size: 3em;
             font-family: var(--spantaran);
             color:white;
+            margin-bottom: 20px;
         }
     
         #nav-menu > a:hover {
