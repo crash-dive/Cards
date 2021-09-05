@@ -29,8 +29,9 @@
             <link href="{{ $pageCss.RelPermalink }}" rel="stylesheet" integrity="{{ $pageCss.Data.Integrity }}" crossorigin="anonymous" />
         {{ end }}
 
-        {{ $navMenuJs := resources.Get "js/nav-menu.js" | minify | fingerprint "sha512" }}
+        {{ $navMenuJs := resources.Get "ts/nav-menu.ts" | js.Build | minify | fingerprint "sha512" }}
         <script src="{{ $navMenuJs.RelPermalink }}" defer integrity="{{ $navMenuJs.Data.Integrity }}"></script>
+
         {{ if isset .Params "js" }} 
             {{ range .Params.js }}
                 {{ $js := resources.Get (print "js/" . ".js") | minify | fingerprint "sha512" }}
