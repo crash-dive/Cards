@@ -4,5 +4,15 @@ languageCode: "en-GB"
 disableKinds: ["taxonomy", "taxonomyTerm", "RSS"]
 enableRobotsTXT: true
 disableHugoGeneratorInject: true
+build:
+  noJSConfigInAssets: true
 sitemap:
     changefreq: monthly
+module:
+  mounts:
+    - source: "assets"
+      target: "assets"
+    - source: "static"
+      target: "static"
+    - source: "node_modules/tabulator-tables/dist/css"
+      target: "assets/css/tabulator-tables"

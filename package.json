@@ -1,0 +1,17 @@
+{
+  "name": "trade",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://trade.crash-dive.co.uk/",
+  "description": "This is the source code for a website I use to list cards I am trading. The website was created and designed by me and built using the Hugo static site tool.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crash-dive/Trade.git"
+  },
+  "dependencies": {
+    "@types/papaparse": "5.2.6",
+    "@types/tabulator-tables": "4.9.3",
+    "papaparse": "5.3.0",
+    "tabulator-tables": "4.9.3"
+  }
+}

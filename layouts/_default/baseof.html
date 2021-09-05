@@ -23,19 +23,19 @@
         
         {{ $baseCss := resources.Get "css/base.css" | minify | fingerprint "sha512" }}
         <link href="{{ $baseCss.RelPermalink }}" rel="stylesheet" integrity="{{ $baseCss.Data.Integrity }}" crossorigin="anonymous" />
-
+        
         {{ range .Params.css }}
             {{ $pageCss := resources.Get (print "css/" . ".css") | minify | fingerprint "sha512" }}
             <link href="{{ $pageCss.RelPermalink }}" rel="stylesheet" integrity="{{ $pageCss.Data.Integrity }}" crossorigin="anonymous" />
         {{ end }}
 
         {{ $navMenuJs := resources.Get "ts/nav-menu.ts" | js.Build | minify | fingerprint "sha512" }}
-        <script src="{{ $navMenuJs.RelPermalink }}" defer integrity="{{ $navMenuJs.Data.Integrity }}"></script>
+        <script src="{{ $navMenuJs.RelPermalink }}" defer integrity="{{ $navMenuJs.Data.Integrity }}" crossorigin="anonymous"></script>
 
-        {{ if isset .Params "js" }} 
-            {{ range .Params.js }}
-                {{ $js := resources.Get (print "js/" . ".js") | minify | fingerprint "sha512" }}
-                <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{ if isset .Params "ts" }} 
+            {{ range .Params.ts }}
+                {{ $ts := resources.Get (print "ts/" . ".ts") | js.Build | minify | fingerprint "sha512" }}
+                <script src="{{ $ts.RelPermalink }}" defer integrity="{{ $ts.Data.Integrity }}" crossorigin="anonymous"></script>
             {{ end }}
         {{ end }}
     </head>
