@@ -7,26 +7,33 @@ sitemap:
     priority: 0.9
 ---
 
-<div id="card-info">
+<div id="game-details">
     <img id="card-back" src="/images/card/x-men.jpg" />
-    <div id="card-description">
-        <h2>X-Men</h2>
-        <p>I have almost completed the unlimited set, but have not started collecting the 1st edition cards yet.</p>
+    <div id="game-name-and-description">
+        <h2 id="game-name">X-Men</h2>
+        <p id="game-description">I have almost completed the unlimited set, but have not started collecting the 1st edition cards yet.</p>
     </div>
+    <button id="download" type="button" disabled>Download</button>
 </div>
 <div id="filter">
-    <input id="filter-all" name="filter" type="radio" />
-    <label for="filter-all" title="All the cards in this set">All</label>
-
-    <input id="filter-trade" name="filter" type="radio" checked />
+    <input id="filter-want" name="filter" type="radio" disabled checked />
+    <label for="filter-want" title="The cards I want">Want List</label>
+    
+    <input id="filter-trade" name="filter" type="radio" disabled />
     <label for="filter-trade" title="The cards I have available to trade">Trade List</label>
     
-    <input id="filter-want" name="filter" type="radio" />
-    <label for="filter-want" title="The cards I want">Want List</label>
-
-    <input id="filter-have" name="filter" type="radio" />
+    <input id="filter-have" name="filter" type="radio" disabled />
     <label for="filter-have" title="The cards I have">Have List</label>
+
+    <input id="filter-all" name="filter" type="radio" disabled />
+    <label for="filter-all" title="All the cards in this set">All</label>
 </div>
-<div id="card-table" data-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRxxbvvbseDNyk67TS6RQiEgKUtgtmablb9F-zNOsyGg9krYklHmwKEx9PosOcRl74EdPQKMLE3HutC/pub?gid=956561670&single=true&output=csv">
-    <p>Loading</p>
+<div id="table-wrapper">
+    <div id="table" data-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRxxbvvbseDNyk67TS6RQiEgKUtgtmablb9F-zNOsyGg9krYklHmwKEx9PosOcRl74EdPQKMLE3HutC/pub?gid=956561670&single=true&output=csv">
+        <div id="loading">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 </div>
