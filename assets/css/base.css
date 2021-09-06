@@ -188,7 +188,9 @@ header {
 
         #nav-menu a:hover {
             text-decoration: underline;
-            color: var(--red)
+            text-decoration-style: wavy;
+            text-underline-offset: 5px; /* The O causes gaps in wavy underlines */
+            color: var(--red);
         }
 
     #nav-button {
