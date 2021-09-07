@@ -37,6 +37,7 @@ main {
     #game-name-and-description {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
     }
 
         #game-name {
@@ -46,6 +47,23 @@ main {
             #game-description {
                 margin: 0;
             }
+
+    #download {
+        height: 40px;
+        margin: 5px 5px 0 10px;
+        padding: 0;
+        background: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        #download:hover {
+            transform: scale(1.1);
+        }
+
+        #download-csv {
+            height: 100%;
+        }
 
 #filter {
     display: flex;

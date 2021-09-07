@@ -13,7 +13,9 @@ sitemap:
         <h2 id="game-name">X-Men</h2>
         <p id="game-description">I have almost completed the unlimited set, but have not started collecting the 1st edition cards yet.</p>
     </div>
-    <button id="download" type="button" disabled>Download</button>
+    <button id="download" type="button" title="Download card data as a csv" disabled>
+        {{< svg id="download-csv" src="images/icon/download-csv.svg" alt="Download data as a csv" >}}
+    </button>
 </div>
 <div id="filter">
     <input id="filter-want" name="filter" type="radio" disabled checked />
