@@ -44,7 +44,8 @@ main {
             margin: 0;
         }
 
-            #game-description {
+            #game-description,
+            #game-description p {
                 margin: 0;
             }
 
@@ -56,6 +57,7 @@ main {
         border: none;
         cursor: pointer;
     }
+
         #download:disabled {
             visibility: hidden;
         }

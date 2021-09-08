@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="Description" content="{{ .Description }}" />
 
-        <title>{{ .Page.Title }}</title>
+        {{ if .IsHome }}
+            <title>Crash Dive Trading</title>
+        {{else}}
+            <title>{{ .Page.Title }} | Crash Dive Trading</title>
+        {{ end }}
 
         {{ $faviconAppleTouch := resources.Get "/favicon-apple-touch.png" }}
         {{ $favicon32 := resources.Get "/favicon-32x32.png" }}
@@ -53,10 +57,10 @@
                 </button>
             </div>
             <nav id="nav-menu">
-                <a href="/" {{ if .IsHome }} class="current-page" {{ end }}>Home</a>
-                <a href="/cards" {{ if eq .RelPermalink "/cards/" }} class="current-page" {{ end }}>Cards</a>
-                <a href="/about" {{ if eq .RelPermalink "/about/" }} class="current-page" {{ end }}>About</a>
-                <a href="/contact" {{ if eq .RelPermalink "/contact/" }} class="current-page" {{ end }}>Contact</a>
+                <a href="/">Home</a>
+                <a href="/cards">Cards</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
             </nav>
         </header>
         <main>

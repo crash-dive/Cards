@@ -49,7 +49,11 @@ function columns(fields: string[]): Tabulator.ColumnDefinition[] {
     const columns: Tabulator.ColumnDefinition[] = [];
     
     for (const field of fields) {
-        if (field === 'Set #') {
+        if (
+            field === 'Set #' ||
+            field === 'Price Estimate' ||
+            field === 'Notes'
+        ) {
             continue;
         }
         else {
@@ -97,6 +101,18 @@ function column(field: string): Tabulator.ColumnDefinition {
             };
 
         case 'Type':
+        case 'Subtype':
+        case 'Colour':
+        case 'Side':
+        case 'Civilization':
+        case 'Nationality':
+        case 'Zone':
+        case 'Border':
+        case 'Phase':
+        case 'World':
+        case 'Pantheon':
+        case 'School':
+        case 'Faction':
             return {
                 title: field,
                 field: field,
@@ -160,6 +176,16 @@ function column(field: string): Tabulator.ColumnDefinition {
         case 'Dup':
             return {
                 title: 'Stock',
+                field: field,
+                headerTooltip: 'The number of cards I have available to trade',
+                responsive: 0,
+                widthGrow: 0.5,
+                visible: false
+            };
+
+        case 'Cube':
+            return {
+                title: field,
                 field: field,
                 headerTooltip: 'The number of cards I have available to trade',
                 responsive: 0,

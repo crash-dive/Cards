@@ -1,0 +1,15 @@
+{{ define "main" }}
+    <ul id="game-list">
+        {{ range .Pages }}
+            {{ $imgPath:= printf "img/cards/%s.jpg" .File.BaseFileName }}
+            {{ $img := resources.Get $imgPath }}
+
+            <li>
+                <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+                    <img src="{{ $img.RelPermalink }}" alt="Card back for {{ .Title }} card game" />
+                    <h2>{{ .Title }}</h2>
+                </a>
+            </li>
+        {{ end }}
+    </ul>
+{{ end }}
