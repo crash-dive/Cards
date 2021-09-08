@@ -3,15 +3,39 @@
     --red: #C80000;
     --dark-blue: #3A6F9B;
     --background-yellow: #feffe3;
-    --comic-panels: comic-panels, Arial Black, Arial, Helvetica, sans-serif;
-    --courier: 'Courier New', Courier, monospace;
+    --comic-panels: 'Comic Panels', 'Arial Black', Arial, Helvetica, sans-serif;
+    --courier: 'Courier Prime', 'Courier New', Courier, monospace;
 }
 
 @font-face {
-    font-family: comic-panels;
-    src: url(../fonts/comic-panels.ttf) format("truetype");
+    font-family: 'Comic Panels';
+    src: url('../fonts/comic-panels.ttf') format('truetype');
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('../fonts/courier-prime.ttf');
+}
+
+    @font-face {
+        font-family: 'Courier Prime';
+        src: url('../fonts/courier-prime-bold.ttf');
+        font-weight: bold;
+    }
+
+    @font-face {
+        font-family: "Courier Prime";
+        src: url('../fonts/courier-prime-italic.ttf');
+        font-style: italic;
+    }
+
+    @font-face {
+        font-family: 'Courier Prime';
+        src: url('../fonts/courier-prime-bold-italic.ttf');
+        font-weight: bold;
+        font-style: italic;
+    }
 
 * {
     box-sizing: border-box;

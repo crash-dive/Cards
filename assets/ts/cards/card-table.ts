@@ -14,9 +14,8 @@ parse(url, {
             const tablulator = new Tabulator(table, {
                 data: results.data,
                 height: '100%',
-                layout:'fitColumns',
+                layout: layout(),
                 responsiveLayout: 'hide',
-                headerHozAlign: 'center',
                 headerFilterPlaceholder: 'Filter',
                 placeholder: "No Results",
                 initialFilter: [{
@@ -27,13 +26,22 @@ parse(url, {
                 groupBy: groupBy(results.meta.fields),
                 groupToggleElement: 'header',
                 columns: columns(results.meta.fields)
-            })
+            });
 
             enableFilter(tablulator);
             enableDownload(tablulator);
 		}
 	}
 });
+
+function layout(): 'fitData' | 'fitColumns' {
+    if (window.innerWidth >= 1024) {
+        return 'fitColumns';
+    }
+    else {
+        return 'fitData';
+    }
+}
 
 function groupBy(fields: string[]): string {
     if (fields.includes('Set')) {
@@ -82,7 +90,7 @@ function column(field: string): Tabulator.ColumnDefinition {
     
         case 'Card #':
             return {
-                title: field,
+                title: '#',
                 field: field,
                 headerTooltip: 'The card\'s number',
                 responsive: 0,
@@ -96,7 +104,7 @@ function column(field: string): Tabulator.ColumnDefinition {
                 field: field,
                 headerTooltip: 'The card\'s name',
                 responsive: 0,
-                widthGrow: 2,
+                widthGrow: 3,
                 headerFilter: 'input',
             };
 

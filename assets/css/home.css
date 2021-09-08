@@ -2,11 +2,12 @@
     --card-height-mobile: 200px;
     --card-height-half-mobile: -100px;
     --card-height-desktop: 400px;
+    --caveat: Caveat, Arial, Helvetica, sans-serif;
 }
 
 @font-face {
-    font-family: caveat;
-    src: url(../fonts/caveat.ttf) format("truetype");
+    font-family: Caveat;
+    src: url('../fonts/caveat.ttf') format('truetype');
     font-display: swap;
 }
 
@@ -41,6 +42,9 @@
     #welcome-and-intro .small-print {
         font-size: 1em;
         margin: 0 10px 10px;
+        border-top: 1px dotted black;
+        padding-top: 10px;
+
     }
 
     #card-on-table {
@@ -79,11 +83,6 @@
         margin-right: 20px;
         margin-bottom: 20px;
     }
-
-        #welcome-and-intro .small-print {
-            border-top: 1px dotted black;
-            padding-top: 10px;
-        }
 
     #deck-comment {
         display: none;
@@ -137,17 +136,16 @@
     #deck-comment {
         width: 50%;
         margin: 40px 0 0 0;
+        font-family: var(--caveat);
     }
 
         #large-comment {
-            font-family: caveat;
             font-size: 4em;
             text-align: center;
             margin: 0;
         }
 
         #small-comment {
-            font-family: caveat;
             font-size: 1em;
             text-align: center;
             margin: 0;

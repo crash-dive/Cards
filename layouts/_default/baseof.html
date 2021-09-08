@@ -20,26 +20,39 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon16.RelPermalink }}">
         <link rel="shortcut icon" type="image/x-icon" href="{{ $favicon.RelPermalink }}" />
 
-        {{ $caveatFont := resources.Get "fonts/caveat.ttf" }}
-        {{ $comicPanelsFont := resources.Get "fonts/comic-panels.ttf" }}
-        <link href="{{ $comicPanelsFont.RelPermalink }}" rel="preload" as="font" type="font/ttf" crossorigin="anonymous">
-        <link href="{{ $caveatFont.RelPermalink }}" rel="preload" as="font" type="font/ttf" crossorigin="anonymous">
+        {{ define "partials/font" }}
+            {{ $font := resources.Get (print "fonts/" . ) }}
+            {{ $fontFingerprint := $font | fingerprint "sha512" }}
+            <link href="{{ $font.RelPermalink }}" rel="preload" as="font" type="font/ttf" integrity="{{ $fontFingerprint.Data.Integrity }}" crossorigin="anonymous">
+        {{ end }}
+        {{ partial "font" "comic-panels.ttf" }}
+        {{ partial "font" "courier-prime.ttf" }}
+        {{ partial "font" "courier-prime-bold.ttf" }}
+        {{ partial "font" "courier-prime-italic.ttf" }}
+        {{ partial "font" "courier-prime-bold-italic.ttf" }}
+        {{ if isset .Params "fonts" }}
+            {{ range .Params.fonts }}
+                {{ partial "font" . }}
+            {{ end }}
+        {{ end }}
         
-        {{ $baseCss := resources.Get "css/base.css" | minify | fingerprint "sha512" }}
-        <link href="{{ $baseCss.RelPermalink }}" rel="stylesheet" integrity="{{ $baseCss.Data.Integrity }}" crossorigin="anonymous" />
-        
+        {{ define "partials/css" }}
+            {{ $css := resources.Get (print "css/" . ".css") | minify | fingerprint "sha512" }}
+            <link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous" />
+        {{ end }}
+        {{ partial "css" "base" }}
         {{ range .Params.css }}
-            {{ $pageCss := resources.Get (print "css/" . ".css") | minify | fingerprint "sha512" }}
-            <link href="{{ $pageCss.RelPermalink }}" rel="stylesheet" integrity="{{ $pageCss.Data.Integrity }}" crossorigin="anonymous" />
+            {{ partial "css" . }}
         {{ end }}
 
-        {{ $navMenuJs := resources.Get "ts/nav-menu.ts" | js.Build | minify | fingerprint "sha512" }}
-        <script src="{{ $navMenuJs.RelPermalink }}" defer integrity="{{ $navMenuJs.Data.Integrity }}" crossorigin="anonymous"></script>
-
-        {{ if isset .Params "ts" }} 
+        {{ define "partials/ts" }}
+            {{ $ts := resources.Get (print "ts/" . ".ts") | js.Build | minify | fingerprint "sha512" }}
+            <script src="{{ $ts.RelPermalink }}" defer integrity="{{ $ts.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{ end }}
+        {{ partial "ts" "nav-menu" }}
+        {{ if isset .Params "ts" }}
             {{ range .Params.ts }}
-                {{ $ts := resources.Get (print "ts/" . ".ts") | js.Build | minify | fingerprint "sha512" }}
-                <script src="{{ $ts.RelPermalink }}" defer integrity="{{ $ts.Data.Integrity }}" crossorigin="anonymous"></script>
+                {{ partial "ts" . }}
             {{ end }}
         {{ end }}
     </head>
