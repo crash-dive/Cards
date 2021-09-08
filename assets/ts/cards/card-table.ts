@@ -9,8 +9,6 @@ parse(url, {
     header: true,
 	complete: (results: ParseResult<Object[]>, file) => {
 		if (results.errors.length === 0) {
-			console.log('Parsing complete:', results, file);
-
             const tablulator = new Tabulator(table, {
                 data: results.data,
                 height: '100%',
