@@ -3,9 +3,9 @@
         <img id="card-back" src="/img/cards/{{ .File.BaseFileName }}.jpg" />
         <div id="game-name-and-description">
             <h2 id="game-name">{{ .Title }}</h2>
-            <div id="game-description">
-                {{ .Content }}
-            </div>
+            <p id="game-publisher">{{ .Params.publisher }} ({{ .Params.released }})</p>
+            <p id="game-description">{{ .Description }}</p>
+            <p id="game-commentary">{{ .Params.commentary }}</p>
         </div>
         <button id="download" type="button" title="Download card data as a csv" disabled>
             {{ $svg := resources.Get "img/icons/download-csv.svg" | minify }}

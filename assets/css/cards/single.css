@@ -39,13 +39,21 @@ main {
         flex-direction: column;
         flex-grow: 1;
     }
-
         #game-name {
             margin: 0;
         }
 
-            #game-description,
-            #game-description p {
+            #game-publisher {
+                margin: 0;
+                font-size: 0.8em;
+                font-style: italic;
+            }
+
+            #game-description {
+                margin: 5px 0;
+            }
+            
+            #game-commentary {
                 margin: 0;
             }
 
