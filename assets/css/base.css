@@ -3,6 +3,8 @@
     --red: #C80000;
     --dark-blue: #3A6F9B;
     --background-yellow: #feffe3;
+    --comic-box-shadow: 10px 10px 0px 0px black;
+    --comic-box-shadow-border: 4px solid black;
     --comic-panels: 'Comic Panels', 'Arial Black', Arial, Helvetica, sans-serif;
     --courier: 'Courier Prime', 'Courier New', Courier, monospace;
 }
@@ -68,8 +70,8 @@ header {
 
 #header-box {
     padding: 10px 20px;
-    border: 4px solid black;
-    box-shadow: 10px 10px 0px 0px black;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
     background-color: white;
     margin: 10px 20px 0 10px;
     display: flex;

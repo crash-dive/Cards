@@ -1,9 +1,18 @@
-
-
-@media (max-width: 1023px) {
-
+#contact-me {
+    margin: 20px 20px 20px 10px;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
+    background: white;
+    font-family: var(--courier);
 }
 
-@media (min-width: 1024px) {
+    #contact-me h2 {
+        font-size: 4em;
+        margin: 10px;
+        border-bottom: 1px dashed black;
+    }
 
-}
+    #contact-me p {
+        font-size: 1.5em;
+        margin: 0 10px 10px;
+    }

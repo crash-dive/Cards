@@ -1,9 +1,52 @@
+#about-me {
+    margin: 20px 20px 20px 10px;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
+    background: white;
+    font-family: var(--courier);
+}
 
+    #about-me h2 {
+        font-size: 4em;
+        margin: 10px;
+        border-bottom: 1px dashed black;
+    }
+
+    #about-me-description {
+        display: flex;
+    }
+
+    #about-me-description p {
+        font-size: 1.5em;
+        margin: 0 10px 10px;
+    }
+
+    #about-me-description a {
+        color: var(--red);
+        font-weight: bold;
+    }
+
+        #about-me-description a:hover {
+            color: var(--blue);
+        }
+
+    #jonathon-smith {
+        border-radius: 10px;
+    }
 
 @media (max-width: 1023px) {
+    #about-me-description {
+        flex-direction: column;
+    }
 
+    #jonathon-smith {
+        margin: 0 auto 10px;
+    }
 }
 
 @media (min-width: 1024px) {
-
+    #jonathon-smith {
+        margin: 0 10px 10px;
+    }
 }
+    

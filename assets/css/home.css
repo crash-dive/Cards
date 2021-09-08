@@ -12,14 +12,14 @@
 }
 
 #welcome-and-intro {
-    border: 4px solid black;
-    box-shadow: 10px 10px 0px 0px black;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
     background-color: white;
     margin: 40px 0 0 10px;
     font-family: var(--courier);
 }
 
-    #welcome-and-intro h3 {
+    #welcome-and-intro h2 {
         font-size: 4em;
         margin: 10px;
         border-bottom: 1px dashed black;
@@ -30,9 +30,9 @@
         font-weight: bold;
     }
 
-    #welcome-and-intro a:hover {
-        color: var(--blue);
-    }
+        #welcome-and-intro a:hover {
+            color: var(--blue);
+        }
 
     #welcome-and-intro .intro {
         font-size: 1.5em;
