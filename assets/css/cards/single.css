@@ -96,7 +96,6 @@ main {
         border-top-right-radius: 8px;
         flex-grow: 1;
         text-align: center;
-        cursor: pointer;
         font-weight: bold;
     }
 
@@ -104,14 +103,18 @@ main {
             border-right: none;
         }
 
-        #filter label:hover,
-        #filter input:checked + label:hover {
+        #filter input:not([disabled]) + label {
+            cursor: pointer;
+        }
+
+        #filter input:not([disabled]) + label:hover,
+        #filter input:checked:not([disabled]) + label:hover {
             color: white;
             background-color: var(--dark-blue);
         }
 
-        #filter label:active,
-        #filter input:checked + label:active {
+        #filter input:not([disabled]) + label:active,
+        #filter input:checked:not([disabled]) + label:active {
             color: white;
             background: black;
         }
@@ -171,3 +174,9 @@ main {
                 transform: scale(2);
             }
         }
+
+    #error-message {
+        text-align: center;
+        color: var(--red);
+        font-weight: bold;
+    }
