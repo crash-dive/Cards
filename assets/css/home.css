@@ -11,72 +11,44 @@
     font-display: swap;
 }
 
-#welcome-and-intro {
-    box-shadow: var(--comic-box-shadow);
-    border: var(--comic-box-shadow-border);
-    background-color: white;
-    margin: 40px 0 0 10px;
-    font-family: var(--courier);
+#welcome-and-intro .small-print {
+    font-size: 1em;
+    margin: 0 10px 10px;
+    border-top: 1px dotted black;
+    padding-top: 10px;
+
 }
 
-    #welcome-and-intro h2 {
-        font-size: 4em;
-        margin: 10px;
-        border-bottom: 1px dashed black;
+#card-on-table {
+    transform: rotateX(59deg) rotateZ(40deg);
+    box-shadow: 15px 15px 2px #000000a8;;
+    backface-visibility: hidden;  /* Removes jagged borders in Chrome */
+    background: black;  /* Removes transparant corners caused by box shadow */
+    border-radius: 10px; /* Rounds the box shadow */
+}
+
+#card-hand img {
+    backface-visibility: hidden; /* Removes jagged boarders in Chrome */
+    border-radius: 10px; /* Rounds the box shadow */
+}
+
+    #card-hand-1 {
+        transform: rotate(-15deg);
+        box-shadow: -10px 15px 2px #000000a8;
     }
 
-    #welcome-and-intro a {
-        color: var(--red);
-        font-weight: bold;
+    #card-hand-2 {
+        transform: rotate(-5deg);
     }
 
-        #welcome-and-intro a:hover {
-            color: var(--blue);
-        }
-
-    #welcome-and-intro .intro {
-        font-size: 1.5em;
-        margin: 0 10px 10px;
+    #card-hand-3 {
+        transform: rotate(5deg);
     }
 
-    #welcome-and-intro .small-print {
-        font-size: 1em;
-        margin: 0 10px 10px;
-        border-top: 1px dotted black;
-        padding-top: 10px;
-
+    #card-hand-4 {
+        transform: rotate(15deg);
+        box-shadow: 10px 15px 2px #000000a8;
     }
-
-    #card-on-table {
-        transform: rotateX(59deg) rotateZ(40deg);
-        box-shadow: 15px 15px 2px #000000a8;;
-        backface-visibility: hidden;  /* Removes jagged borders in Chrome */
-        background: black;  /* Removes transparant corners caused by box shadow */
-        border-radius: 10px; /* Rounds the box shadow */
-    }
-
-    #card-hand img {
-        backface-visibility: hidden; /* Removes jagged boarders in Chrome */
-        border-radius: 10px; /* Rounds the box shadow */
-    }
-
-        #card-hand-1 {
-            transform: rotate(-15deg);
-            box-shadow: -10px 15px 2px #000000a8;
-        }
-
-        #card-hand-2 {
-            transform: rotate(-5deg);
-        }
-
-        #card-hand-3 {
-            transform: rotate(5deg);
-        }
-
-        #card-hand-4 {
-            transform: rotate(15deg);
-            box-shadow: 10px 15px 2px #000000a8;
-        }
 
 @media (max-width: 1023px) {
     #welcome-and-intro {

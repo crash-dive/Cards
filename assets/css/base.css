@@ -87,6 +87,37 @@ header {
         margin: 0;
     }
 
+.red-link {
+    color: var(--red);
+    font-weight: bold;
+}
+
+    .red-link:hover {
+        color: var(--dark-blue);
+        text-decoration: underline;
+    }
+
+.main-shadow-box {
+    margin: 20px 20px 20px 10px;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
+    background: white;
+    font-family: var(--courier);
+}
+
+    .main-shadow-box h2 {
+        font-size: 4em;
+        margin: 10px;
+        border-bottom: 1px dashed black;
+    }
+
+    .main-shadow-box p,
+    .main-shadow-box li {
+        font-size: 1.5em;
+        margin: 0 10px 10px;
+    }
+    
+
 @media (max-width: 1023px) {
     #header-box {
         width: 100%;
