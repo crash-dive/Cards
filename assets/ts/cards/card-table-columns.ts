@@ -1,3 +1,5 @@
+import type { FilterSettings } from './card-table-filter'
+
 export function layout(): 'fitData' | 'fitColumns' {
     if (window.innerWidth >= 1024) {
         return 'fitColumns';
@@ -17,7 +19,7 @@ export function groupBy(fields: string[]): string {
     }
 }
 
-export function definition(fields: string[]): Tabulator.ColumnDefinition[] {
+export function definition(fields: string[], filter: FilterSettings): Tabulator.ColumnDefinition[] {
     const columns: Tabulator.ColumnDefinition[] = [];
     
     for (const field of fields) {
@@ -29,14 +31,14 @@ export function definition(fields: string[]): Tabulator.ColumnDefinition[] {
             continue;
         }
         else {
-            columns.push(column(field));
+            columns.push(column(field, filter));
         }
     }
 
     return columns;
 }
 
-export function column(field: string): Tabulator.ColumnDefinition {
+export function column(field: string, filter: FilterSettings): Tabulator.ColumnDefinition {
     switch (field) {
         case 'Set':
             return {
@@ -45,6 +47,7 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The set that the card belongs to',
                 responsive: 100,
                 widthGrow: 1,
+                visible: visible(field, filter),
                 headerFilter: 'select',
                 headerFilterParams: {
                     values: true,
@@ -59,6 +62,7 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The card\'s number',
                 responsive: 0,
                 widthGrow: 0.5,
+                visible: visible(field, filter),
                 headerFilter: 'input',
             };
 
@@ -69,6 +73,7 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The card\'s name',
                 responsive: 0,
                 widthGrow: 3,
+                visible: visible(field, filter),
                 headerFilter: 'input',
             };
 
@@ -91,6 +96,7 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The type or catagory of the card',
                 responsive: 50,
                 widthGrow: 1,
+                visible: visible(field, filter),
                 headerFilter: 'select',
                 headerFilterParams: {
                     values: true,
@@ -105,6 +111,7 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The rarity of the card',
                 responsive: 10,
                 widthGrow: 1,
+                visible: visible(field, filter),
                 headerFilter: 'select',
                 headerFilterParams: {
                     values: true,
@@ -119,10 +126,10 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'If I have the card or not',
                 responsive: 0,
                 widthGrow: 0.5,
+                visible: visible(field, filter),
                 headerFilter: 'tickCross',
                 formatter: 'tickCross',
                 hozAlign: 'center',
-                visible: false,
                 mutator: value => {
                     switch (value) {
                         case 'x': /* Own */
@@ -152,17 +159,21 @@ export function column(field: string): Tabulator.ColumnDefinition {
                 headerTooltip: 'The number of cards I have available to trade',
                 responsive: 0,
                 widthGrow: 0.5,
-                visible: false
+                visible: visible(field, filter)
             };
 
         case 'Cube':
             return {
                 title: field,
                 field: field,
-                headerTooltip: 'The number of cards I have available to trade',
+                headerTooltip: 'The number of cards I have in my playing cube',
                 responsive: 0,
                 widthGrow: 0.5,
-                visible: false
+                visible: visible(field, filter)
             };
     }
+}
+
+function visible(field: string, filter: FilterSettings): boolean {
+    return !filter.hide.includes(field);
 }

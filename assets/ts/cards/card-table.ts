@@ -46,7 +46,7 @@ function createTable(table: HTMLTableElement, results: ParseResult<Object[]>): v
         initialFilter: filterSettings.filter,
         groupBy: columns.groupBy(results.meta.fields),
         groupToggleElement: 'header',
-        columns: columns.definition(results.meta.fields)
+        columns: columns.definition(results.meta.fields, filterSettings)
     });
 
     filter.enable(tablulator, filterSettings);

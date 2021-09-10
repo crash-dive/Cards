@@ -1,10 +1,10 @@
-type FilterType = 
+export type FilterType = 
     'want' |
     'trade' |
     'have' |
     'all';
 
-type FilterSettings = {
+export type FilterSettings = {
     value: FilterType,
     filter: Tabulator.Filter[];
     hide: string[];
