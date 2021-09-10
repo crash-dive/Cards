@@ -1,5 +1,5 @@
-baseURL: "http://trade.crashdive.co.uk/"
-title: "Crash Dive - Trade"
+baseURL: "http://cards.crashdive.co.uk/"
+title: "Crash Dive - Cards"
 languageCode: "en-GB"
 disableKinds: ["taxonomy", "taxonomyTerm", "RSS"]
 enableRobotsTXT: true
