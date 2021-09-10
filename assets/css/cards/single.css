@@ -84,7 +84,7 @@ main {
     }
 
     #filter label {
-        padding: 5px;
+        padding: 5px 0;
         margin: 0;
         border-top: 1px solid black;
         border-right: 1px solid black;
