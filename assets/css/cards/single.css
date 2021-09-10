@@ -25,37 +25,33 @@ main {
     }
 
 #game-details {
-    display: flex;
-    padding-bottom: 5px;
+    display: grid;
 }
 
     #card-back {
-        height: 100px;
-        margin: 5px 10px 0 5px;
+        grid-area: back;
     }
 
-    #game-name-and-description {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+    #game-name {
+        margin: 0;
+        grid-area: name;
     }
-        #game-name {
-            margin: 0;
-        }
 
-            #game-publisher {
-                margin: 0;
-                font-size: 0.8em;
-                font-style: italic;
-            }
+    #game-publisher {
+        font-size: 0.8em;
+        font-style: italic;
+        grid-area: publisher;
+    }
 
-            #game-description {
-                margin: 5px 0;
-            }
-            
-            #game-commentary {
-                margin: 0;
-            }
+    #game-description {
+        grid-area: description;
+        align-self: center;
+    }
+    
+    #game-commentary {
+        grid-area: commentary;
+        align-self: center;
+    }
 
     #download {
         height: 40px;
@@ -64,6 +60,7 @@ main {
         background: white;
         border: none;
         cursor: pointer;
+        grid-area: download;
     }
 
         #download:disabled {
@@ -180,3 +177,74 @@ main {
         color: var(--red);
         font-weight: bold;
     }
+
+@media (max-width: 1023px) {
+    #game-details {
+        grid-template-columns: auto 1fr auto; 
+        grid-template-rows: auto auto auto auto; 
+        grid-template-areas: 
+            "back        name        download"
+            "back        publisher   download"
+            "description description description"
+            "commentary  commentary  commentary";
+    }
+
+    #card-back {
+        margin: 5px 10px 0 5px;
+        position: relative;
+    }
+
+        #card-back-image {
+            border-radius: 5px;
+            position: absolute;
+            height: 100%;
+        }
+
+        /* This is an transparent PNG 35x25 px (10% of the cardback) */
+        /* There is no other way I can think of to make it expand the page */
+        #card-back-expander {
+            height: 100%;
+            visibility: hidden;
+        }
+
+    #game-publisher {
+        margin: 0;
+    }
+
+    #game-commentary,
+    #game-description {
+        margin: 5px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #game-details {
+        grid-template-columns: auto 1fr auto; 
+        grid-template-rows: auto auto 1fr 1fr; 
+        grid-template-areas: 
+            "back name        download"
+            "back publisher   download"
+            "back description download"
+            "back commentary  download";
+    }
+
+    #card-back {
+        border-radius: 5px;
+    }
+
+        #card-back-image {
+            height: 100px;
+            border-radius: 5px;
+            margin: 5px 10px 0 5px;
+        }
+
+        #card-back-expander {
+            display: none;
+        }
+
+    #game-publisher,
+    #game-commentary,
+    #game-description {
+        margin: 0;
+    }
+}

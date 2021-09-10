@@ -1,12 +1,15 @@
 {{ define "main" }}
     <div id="game-details">
-        <img id="card-back" src="/img/cards/{{ .File.BaseFileName }}.jpg" />
-        <div id="game-name-and-description">
-            <h2 id="game-name">{{ .Title }}</h2>
-            <p id="game-publisher">{{ .Params.publisher }} ({{ .Params.released }})</p>
-            <p id="game-description">{{ .Description }}</p>
-            <p id="game-commentary">{{ .Params.commentary }}</p>
+        <div id="card-back" >
+            <img id="card-back-image" src="/img/cards/{{ .File.BaseFileName }}.jpg" />
+
+            <!-- A transparent PNG 35x25 px (10% of the cardback) used to expand this grid cell on mobile devices -->
+            <img id="card-back-expander" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAQAAADLAWkjAAAAHElEQVR42mNkIBkwjmoZ1TKqZVTLqJZRLUNWCwCEewAkeRv06AAAAABJRU5ErkJggg=="> 
         </div>
+        <h2 id="game-name">{{ .Title }}</h2>
+        <p id="game-publisher">{{ .Params.publisher }} ({{ .Params.released }})</p>
+        <p id="game-description">{{ .Description }}</p>
+        <p id="game-commentary">{{ .Params.commentary }}</p>
         <button id="download" type="button" title="Download card data as a csv" disabled>
             {{ $svg := resources.Get "img/icons/download-csv.svg" | minify }}
             <img id="download-csv" src="{{ $svg.RelPermalink }}" alt="Download CSV Icon" />
