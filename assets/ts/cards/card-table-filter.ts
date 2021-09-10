@@ -38,7 +38,7 @@ export function getSettings(filter: FilterType): FilterSettings {
             return {
                 value: 'trade',
                 filter: [{
-                    field: 'Col',
+                    field: 'Dup',
                     type: '>',
                     value: 0
                 }],
