@@ -1,3 +1,20 @@
+#game-search {
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
+    background: white;
+    font-family: var(--courier);
+    font-size: 2em;
+    text-align: center;
+    width: calc(100% - 30px);
+    margin: 20px 20px 10px 10px;
+    padding: 2px;
+    display: block;
+}
+
+    #game-search:focus {
+        outline: none;
+    }
+
 #game-list {
     list-style: none;
     display: flex;
@@ -5,8 +22,7 @@
     flex-wrap: wrap;
     font-family: var(--courier);
     padding: 0;
-    margin: 10px;
-
+    margin: 0;
 }
 
     #game-list li {
@@ -14,6 +30,10 @@
         margin: 10px 5px;
         display: flex;
     }
+
+        #game-list li[hidden] {
+            display: none;
+        }
 
         #game-list a {
             display: flex;
