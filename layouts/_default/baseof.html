@@ -46,7 +46,7 @@
         {{ end }}
 
         {{ define "partials/ts" }}
-            {{ $ts := resources.Get (print "ts/" . ".ts") | js.Build | fingerprint "sha512" }}
+            {{ $ts := resources.Get (print "ts/" . ".ts") | js.Build | minify | fingerprint "sha512" }}
             <script src="{{ $ts.RelPermalink }}" defer integrity="{{ $ts.Data.Integrity }}" crossorigin="anonymous"></script>
         {{ end }}
         {{ partial "ts" "nav-menu" }}
