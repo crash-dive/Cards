@@ -15,7 +15,7 @@
 <link href=/fonts/courier-prime-bold-italic.ttf rel=preload as=font type=font/ttf integrity="sha512-yewyk/y4VRVWUuqIw+BgxdwFIIun0jz1ni1P8aB8b3Oq5fVib6DiDNnSSo28fHAw5ITriWIteppxyYkI7/PuLQ==" crossorigin=anonymous>
 <link href=/css/base.min.7491267b20cc48b67919d64d16b7000a66396ac025e1ad68d9f706d30d6e81b608eee73eff692a28406de88548c4a701b60114a227addc2c911a94aca3812b9e.css rel=stylesheet integrity="sha512-dJEmeyDMSLZ5GdZNFrcACmY5asAl4a1o2fcG0w1ugbYI7uc+/2kqKEBt6IVIxKcBtgEUoiet3CyRGpSso4Erng==" crossorigin=anonymous>
 <link href=/css/tabulator-tables/tabulator_simple.min.008fd3385d599d05318f13f54c58591edfc3d286e786b3d9a4d45d5bbfa832f75263e496e30a26e13e88949fbe556984f94d03f006c164196c6b5dc8adf020bd.css rel=stylesheet integrity="sha512-AI/TOF1ZnQUxjxP1TFhZHt/D0obnhrPZpNRdW7+oMvdSY+SW4wom4T6IlJ++VWmE+U0D8AbBZBlsa13IrfAgvQ==" crossorigin=anonymous>
-<link href=/css/cards/single.min.ee65319d21853d92ff4bb8f4b2f6c957c9ccf29470499c5fa5d32d58ce05cccd6910e0762e1511671419f39879677046398a58bfc5fc027ef947c36781294443.css rel=stylesheet integrity="sha512-7mUxnSGFPZL/S7j0svbJV8nM8pRwSZxfpdMtWM4FzM1pEOB2LhURZxQZ85h5Z3BGOYpYv8X8An75R8NngSlEQw==" crossorigin=anonymous>
+<link href=/css/cards/single.min.49dc14ec7993e8f6dff42b830142a462c1653698cab0c9ed807b5655e9b091812b722aa305099b76bb092068f4cd2bb19c9a91f239a2ba78ab6381836d7095db.css rel=stylesheet integrity="sha512-SdwU7HmT6Pbf9CuDAUKkYsFlNpjKsMntgHtWVemwkYErciqjBQmbdrsJIGj0zSuxnJqR8jmiunirY4GDbXCV2w==" crossorigin=anonymous>
 <script src=/ts/nav-menu.min.ebf1ecc5acd44cff23cbee9e4182c76e7e6c0516c6be42293081987f38073078748afd7f4f76ad7beb9ffee309d940426a5ff90cd0c21f2cd44e2b6b9c5a383a.js defer integrity="sha512-6/HsxazUTP8jy+6eQYLHbn5sBRbGvkIpMIGYfzgHMHh0iv1/T3ate+uf/uMJ2UBCal/5DNDCHyzUTitrnFo4Og==" crossorigin=anonymous></script>
 <script src=/ts/cards/card-table.min.8a30ed854be43755ae9dabba6e4a381c080c6fc32f6ed508cd34bc034b7895180a4dbc240c47943334a74d550e463d8f9ba6682410e5cd86392a9c29b3d0faa3.js defer integrity="sha512-ijDthUvkN1Wunau6bko4HAgMb8MvbtUIzTS8A0t4lRgKTbwkDEeUMzSnTVUORj2Pm6ZoJBDlzYY5Kpwps9D6ow==" crossorigin=anonymous></script>
 </head>
@@ -43,7 +43,11 @@
 <div id=game-details>
 <details id=game-name title="Click to minimise details section" open>
 <summary>
-<h2>Pirates of the Caribbean</h2>
+<h2>
+<span>Pirates of the Caribbean</span>
+<span id=details-open>►</span>
+<span id=details-closed>▼</span>
+</h2>
 </summary>
 </details>
 <div id=card-back>
