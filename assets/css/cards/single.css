@@ -33,9 +33,37 @@ main {
     }
 
     #game-name {
-        margin: 0;
         grid-area: name;
+        cursor: pointer;
     }
+
+        #game-name h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        #game-name summary {
+            list-style: none;
+        }
+
+            #game-name[open] summary h2:after {
+                content: " ▼";
+            }
+
+            #game-name:not([open]) {
+                margin-left: 5px;
+            }
+
+            #game-name:not([open]) summary h2::after {
+                content: ' ►';
+            }
+
+            #game-name:not([open]) ~ #card-back,
+            #game-name:not([open]) ~ #game-publisher,
+            #game-name:not([open]) ~ #game-description,
+            #game-name:not([open]) ~ #game-comentary{
+                display: none;
+            } 
 
     #game-publisher {
         font-size: 0.8em;
@@ -55,7 +83,7 @@ main {
 
     #download {
         height: 40px;
-        margin: 5px 5px 0 10px;
+        margin: 5px 5px 5px 10px;
         padding: 0;
         background: white;
         border: none;

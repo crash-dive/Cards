@@ -1,12 +1,16 @@
 {{ define "main" }}
     <div id="game-details">
+        <details id="game-name" title="Click to minimise details section" open>
+            <summary>
+                <h2>{{ .Title }}</h2>
+            </summary>
+        </details>
         <div id="card-back" >
             <img id="card-back-image" src="/img/cards/{{ .File.BaseFileName }}.jpg" />
-
+            
             <!-- A transparent PNG 35x25 px (10% of the cardback) used to expand this grid cell on mobile devices -->
             <img id="card-back-expander" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAjCAQAAADLAWkjAAAAHElEQVR42mNkIBkwjmoZ1TKqZVTLqJZRLUNWCwCEewAkeRv06AAAAABJRU5ErkJggg=="> 
         </div>
-        <h2 id="game-name">{{ .Title }}</h2>
         <p id="game-publisher">{{ .Params.publisher }} ({{ .Params.released }})</p>
         <p id="game-description">{{ .Description }}</p>
         <p id="game-commentary">{{ .Params.commentary }}</p>
