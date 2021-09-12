@@ -1,11 +1,11 @@
 import type { FilterSettings } from './card-table-filter'
 
-export function layout(): 'fitData' | 'fitColumns' {
+export function layout(): 'fitDataFill' | 'fitColumns' {
     if (window.innerWidth >= 1024) {
         return 'fitColumns';
     }
     else {
-        return 'fitData';
+        return 'fitDataFill';
     }
 }
 
@@ -20,8 +20,18 @@ export function groupBy(fields: string[]): string {
 }
 
 export function definition(fields: string[], filter: FilterSettings): Tabulator.ColumnDefinition[] {
-    const columns: Tabulator.ColumnDefinition[] = [];
-    
+    const columns: Tabulator.ColumnDefinition[] = [{
+        title: '',
+        formatter:"responsiveCollapse",
+        responsive: 0,
+        width:30, 
+        minWidth:30, 
+        hozAlign: "center",
+        resizable:false, 
+        headerSort:false
+    }];
+
+
     for (const field of fields) {
         if (
             field === 'Set #' ||

@@ -88,6 +88,12 @@ export function enable(tablulator: Tabulator, settings: FilterSettings): void {
 function run(tablulator: Tabulator, filter: FilterType): void {
     const settings = getSettings(filter);
 
+    //The library has a bug when you mix hidden columns and responsive layouts
+    //The responsiveLayout.Update function does not reset this value so we need to
+    tablulator.modules.responsiveLayout.index = 0;
+
+    tablulator.blockRedraw();
+
     tablulator.clearFilter(/* includeHeaderFilters: */ false);
 
     if (settings.filter !== null) {
@@ -98,7 +104,8 @@ function run(tablulator: Tabulator, filter: FilterType): void {
 
     updateQueryStringParam(settings);
 
-    tablulator.redraw();
+    tablulator.restoreRedraw();
+    tablulator.redraw(true);
 }
 
 function showHideColumns(tablulator: Tabulator, settings: FilterSettings): void {
