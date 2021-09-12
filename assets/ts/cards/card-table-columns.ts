@@ -1,11 +1,11 @@
 import type { FilterSettings } from './card-table-filter'
 
-export function layout(): 'fitDataFill' | 'fitColumns' {
+export function layout(): 'fitData' | 'fitColumns' {
     if (window.innerWidth >= 1024) {
         return 'fitColumns';
     }
     else {
-        return 'fitDataFill';
+        return 'fitData';
     }
 }
 
@@ -41,14 +41,14 @@ export function definition(fields: string[], filter: FilterSettings): Tabulator.
             continue;
         }
         else {
-            columns.push(column(field, filter));
+            columns.push(column(fields, field, filter));
         }
     }
 
     return columns;
 }
 
-export function column(field: string, filter: FilterSettings): Tabulator.ColumnDefinition {
+export function column(fields: string[], field: string, filter: FilterSettings): Tabulator.ColumnDefinition {
     switch (field) {
         case 'Set':
             return {
@@ -68,12 +68,23 @@ export function column(field: string, filter: FilterSettings): Tabulator.ColumnD
         case 'Card #':
             return {
                 title: '#',
+                titleDownload: field,
                 field: field,
-                headerTooltip: 'The card\'s number',
+                headerTooltip: 'The number of the card',
                 responsive: 0,
                 widthGrow: 0.5,
                 visible: visible(field, filter),
                 headerFilter: 'input',
+                formatter: fields.includes("Printed #") ? cardNumberFormater : 'plaintext' 
+            };
+    
+        case 'Printed #':
+            return {
+                title: field,
+                field: field,
+                headerTooltip: 'The number printed on the card',
+                visible: false,
+                download: true
             };
 
         case 'Card':
@@ -182,6 +193,10 @@ export function column(field: string, filter: FilterSettings): Tabulator.ColumnD
                 visible: visible(field, filter)
             };
     }
+}
+
+function cardNumberFormater(cell: Tabulator.CellComponent): string {
+    return cell.getData()['Printed #'];
 }
 
 function visible(field: string, filter: FilterSettings): boolean {
