@@ -2,7 +2,11 @@
     <div id="game-details">
         <details id="game-name" title="Click to minimise details section" open>
             <summary>
-                <h2>{{ .Title }}</h2>
+                <h2>
+                    <span>{{ .Title }}</span>
+                    <span id="details-open">►</span>
+                    <span id="details-closed">▼</span>
+                </h2>
             </summary>
         </details>
         <div id="card-back" >

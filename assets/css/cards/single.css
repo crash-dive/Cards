@@ -46,16 +46,18 @@ main {
             list-style: none;
         }
 
-            #game-name[open] summary h2:after {
-                content: " ▼";
+            #game-name[open] #details-open,
+            #game-name:not([open]) #details-closed {
+                display: inline;
+            }
+            
+            #game-name[open] #details-closed,
+            #game-name:not([open]) #details-open {
+                display: none;
             }
 
             #game-name:not([open]) {
                 margin-left: 5px;
-            }
-
-            #game-name:not([open]) summary h2::after {
-                content: ' ►';
             }
 
             #game-name:not([open]) ~ #card-back,
@@ -218,7 +220,7 @@ main {
     }
 
     #card-back {
-        margin: 5px 10px 0 5px;
+        margin: 5px 0 0 5px;
         position: relative;
     }
 
@@ -235,8 +237,9 @@ main {
             visibility: hidden;
         }
 
+    #game-name,
     #game-publisher {
-        margin: 0;
+        margin: 0 0 0 10px;
     }
 
     #game-commentary,
