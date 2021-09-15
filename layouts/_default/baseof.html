@@ -19,7 +19,7 @@
         <meta property="og:locale" content="en_GB" />
         <meta property="og:site_name" content="Crash Dive Trading" />
 
-        {{ $openGraph := resources.Get (print "img/open-graph/" .Params.openGraph ".webp") }}
+        {{ $openGraph := resources.Get (print "img/open-graph/" .Params.openGraph ".webp") | fingerprint }}
         <meta property="og:image:url" content="{{ $openGraph.Permalink }}">
         <meta property="og:image:type" content="image/webp">
         <meta property="og:image:width" content="{{ $openGraph.Width }}">

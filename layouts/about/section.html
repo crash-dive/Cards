@@ -2,7 +2,7 @@
     <section id="about-me" class="main-shadow-box">
         <h2>About Me</h2>
         <div id="about-me-description">
-            {{ $img := resources.Get "img/pictures/jonathon-smith.jpg" | minify }}
+            {{ $img := resources.Get "img/pictures/jonathon-smith.jpg" }}
             <img id="jonathon-smith" height="200" src="{{ $img.RelPermalink }}" alt="A picture of Jonathon Smith" />
             
             <div>
