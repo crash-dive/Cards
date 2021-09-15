@@ -51,14 +51,12 @@
 }
 
     .card-table-1 {
-        box-shadow: 15px 15px 2px #000000a8;;
         transform: rotateX(59deg) rotateZ(40deg);
         top: 45%;
         left: 10%;
     }
 
     .card-table-2 {
-        box-shadow: -15px -15px 2px #000000a8;;
         transform: rotateX(59deg) rotateZ(220deg);
         top: 10%;
         left: 40%;

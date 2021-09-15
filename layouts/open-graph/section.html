@@ -1,6 +1,6 @@
 {{ define "partials/open-graph-img" }}
 
-    <div class="open-graph-img">
+    <div class="open-graph-img" id="{{ .id }}">
         <div class="header">
             <div class="website-header">
                 <h2>Crash Dive Trading</h2>
@@ -23,13 +23,15 @@
 
 {{ define "main" }}
     {{ partial "open-graph-img" (dict
-        "header" "" 
+        "header" ""
+        "id" "base"
         "img" "logos/crash-dive-card.svg"
     )}}
 
     {{ range (where .Site.RegularPages.ByTitle "Section" "cards" ) }}
         {{ partial "open-graph-img" (dict
             "header" .Title
+            "id" .File.BaseFileName
             "img" (print "cards/" .File.BaseFileName ".jpg")
         )}}
     {{ end }}
