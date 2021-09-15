@@ -2,7 +2,7 @@
     <input id="game-search" type="search" placeholder="Search" autofocus class="main-shadow-box" />
     <ul id="game-list">
         {{ range .Pages }}
-            {{ $imgPath:= printf "img/cards/%s.jpg" .File.BaseFileName }}
+            {{ $imgPath:= print "img/cards/" .File.BaseFileName ".jpg" }}
             {{ $img := resources.Get $imgPath }}
 
             <li data-name="{{ lower .Title }}">

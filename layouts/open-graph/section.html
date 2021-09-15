@@ -1,0 +1,36 @@
+{{ define "partials/open-graph-img" }}
+
+    <div class="open-graph-img">
+        <div class="header">
+            <div class="website-header">
+                <h2>Crash Dive Trading</h2>
+                <p>Trade cards with me!</p>
+            </div>
+            <div class="page-header">{{ .header }}</div>
+        </div>
+
+        {{ $svg := resources.Get (print "img/" .img) }}
+        <img class="card-table card-table-1" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+        <img class="card-table card-table-2" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+
+        <img class="card-hand card-hand-1" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+        <img class="card-hand card-hand-2" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+        <img class="card-hand card-hand-3" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+        <img class="card-hand card-hand-4" src="{{ $svg.RelPermalink }}" alt="A trading card using the crash dive brand" />
+    </div>
+
+{{ end }}
+
+{{ define "main" }}
+    {{ partial "open-graph-img" (dict
+        "header" "" 
+        "img" "logos/crash-dive-card.svg"
+    )}}
+
+    {{ range (where .Site.RegularPages.ByTitle "Section" "cards" ) }}
+        {{ partial "open-graph-img" (dict
+            "header" .Title
+            "img" (print "cards/" .File.BaseFileName ".jpg")
+        )}}
+    {{ end }}
+{{ end }}

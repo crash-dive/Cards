@@ -1,0 +1,93 @@
+.open-graph-img {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto;
+    border: 1px solid black;
+}
+
+.header {
+    padding: 10px 0;
+    box-shadow: var(--comic-box-shadow);
+    border: var(--comic-box-shadow-border);
+    background-color: white;
+    margin: 10px 20px 0 10px;
+    display: flex;
+}
+
+    .website-header {
+        font-family: var(--comic-panels);
+        margin: 0;
+        padding: 0 20px;
+    }
+
+        .website-header h2 {
+            color: var(--blue);
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .website-header p {
+            color:var(--red);
+            margin: 0;
+        }
+
+    .page-header {
+        font-family: var(--courier);
+        font-weight: bold;
+        font-size: 2.6em;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+.card-hand,
+.card-table {
+    backface-visibility: hidden;  /* Removes jagged borders in Chrome */
+    background: black;  /* Removes transparant corners caused by box shadow */
+    border-radius: 10px; /* Rounds the box shadow */
+    height: 350px;
+    position: absolute;
+}
+
+    .card-table-1 {
+        box-shadow: 15px 15px 2px #000000a8;;
+        transform: rotateX(59deg) rotateZ(40deg);
+        top: 45%;
+        left: 10%;
+    }
+
+    .card-table-2 {
+        box-shadow: -15px -15px 2px #000000a8;;
+        transform: rotateX(59deg) rotateZ(220deg);
+        top: 10%;
+        left: 40%;
+    }
+
+    .card-hand {
+        bottom: -5%;
+        right: 0;
+    }
+
+        .card-hand-1 {
+            transform: rotate(-15deg);
+            box-shadow: -10px 15px 2px #000000a8;
+            left: 60%;
+        }
+
+        .card-hand-2 {
+            transform: rotate(-5deg);
+            left: 65%;
+        }
+
+        .card-hand-3 {
+            transform: rotate(5deg);
+            left: 70%;
+        }
+
+        .card-hand-4 {
+            transform: rotate(15deg);
+            box-shadow: 10px 15px 2px #000000a8;
+            margin-bottom: -20px;
+            left: 75%;
+        }
