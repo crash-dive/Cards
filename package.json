@@ -18,6 +18,6 @@
     "tabulator-tables": "5.1.0"
   },
   "devDependencies": {
-    "puppeteer": "10.2.0"
+    "puppeteer": "13.3.1"
   }
 }
