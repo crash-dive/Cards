@@ -1,1 +1,0 @@
-(()=>{var a=document.getElementById("game-search"),b=document.querySelectorAll("#game-list li");a.addEventListener("input",()=>{const c=a.value.toLowerCase();b.forEach(a=>{a.hidden=!a.dataset.name.includes(c)})})})()
