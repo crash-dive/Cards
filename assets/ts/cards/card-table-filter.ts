@@ -1,3 +1,5 @@
+import type { Tabulator } from 'tabulator-tables';
+
 export type FilterType = 
     'want' |
     'trade' |
@@ -6,7 +8,7 @@ export type FilterType =
 
 export type FilterSettings = {
     value: FilterType,
-    filter: Tabulator.Filter[];
+    filter: Tabulator.Filter[] | ((data: any, filterParams: any) => boolean);
     hide: string[];
 };
 
@@ -23,41 +25,18 @@ export function getSettings(filter: FilterType): FilterSettings {
         case 'want':
             return {
                 value: 'want',
-                filter: [{
-                    field: 'Col',
-                    type: '=',
-                    value: false
-                }],
+                filter: (data: any, filterParams: any) => data.Have < data.Want,
                 hide: [
-                    'Col',
-                    'Dup'
+                    'Trade'
                 ]
             };
 
         case 'trade':
             return {
                 value: 'trade',
-                filter: [{
-                    field: 'Dup',
-                    type: '>',
-                    value: 0
-                }],
+                filter: (data: any, filterParams: any) => data.Trade > 0,
                 hide: [
-                    'Col'
-                ]
-            };
-
-        case 'have':
-            return {
-                value: 'have',
-                filter: [{
-                    field: 'Col',
-                    type: '=',
-                    value: true
-                }],
-                hide: [
-                    'Col',
-                    'Dup'
+                    'Have'
                 ]
             };
 

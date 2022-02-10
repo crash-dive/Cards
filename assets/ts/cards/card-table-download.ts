@@ -1,3 +1,5 @@
+import type { Tabulator } from 'tabulator-tables';
+
 export function enable(tablulator: Tabulator): void {
     const download = document.getElementById('download') as HTMLButtonElement;
     

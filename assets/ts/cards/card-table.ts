@@ -1,5 +1,5 @@
 import { parse, ParseResult } from 'papaparse';
-import Tabulator from 'tabulator-tables';
+import { TabulatorFull as Tabulator } from 'tabulator-tables';
 
 import * as columns from './card-table-columns'
 import * as filter from './card-table-filter'
@@ -42,12 +42,15 @@ function createTable(table: HTMLTableElement, results: ParseResult<Object[]>): v
         layout: columns.layout(),
         responsiveLayout: 'collapse',
         responsiveLayoutCollapseStartOpen: false,
-        headerFilterPlaceholder: '',
         placeholder: "No Results",
         initialFilter: filterSettings.filter,
         groupBy: columns.groupBy(results.meta.fields),
         groupToggleElement: 'header',
-        columns: columns.definition(results.meta.fields, filterSettings)
+        columns: columns.definition(results.meta.fields, filterSettings),
+        columnDefaults: {
+            title: '',
+            headerFilterPlaceholder: ''
+        }
     });
 
     filter.enable(tablulator, filterSettings);

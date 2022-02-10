@@ -1,4 +1,5 @@
 import type { FilterSettings } from './card-table-filter'
+import type { Tabulator } from 'tabulator-tables';
 
 export function layout(): 'fitData' | 'fitColumns' {
     if (window.innerWidth >= 1024) {
@@ -35,8 +36,10 @@ export function definition(fields: string[], filter: FilterSettings): Tabulator.
     for (const field of fields) {
         if (
             field === 'Set #' ||
+            field === 'Printed #' ||
             field === 'Price Estimate' ||
-            field === 'Notes'
+            field === 'Notes' ||
+            field === 'Want'
         ) {
             continue;
         }
@@ -62,6 +65,9 @@ export function column(fields: string[], field: string, filter: FilterSettings):
                 headerFilterParams: {
                     values: true,
                     sortValuesList: 'asc'
+                },
+                sorter: function(a, b, aRow, bRow, column, dir, sorterParams){
+                    return aRow.getData()['Set #'] - bRow.getData()['Set #'];
                 }
             };
     
@@ -75,16 +81,8 @@ export function column(fields: string[], field: string, filter: FilterSettings):
                 widthGrow: 0.5,
                 visible: visible(field, filter),
                 headerFilter: 'input',
-                formatter: fields.includes("Printed #") ? cardNumberFormater : 'plaintext' 
-            };
-    
-        case 'Printed #':
-            return {
-                title: field,
-                field: field,
-                headerTooltip: 'The number printed on the card',
-                visible: false,
-                download: true
+                formatter: fields.includes("Printed #") ? cardNumberFormater : 'plaintext',
+                accessor: fields.includes("Printed #") ? cardNumberAccessor : undefined
             };
 
         case 'Card':
@@ -140,54 +138,28 @@ export function column(fields: string[], field: string, filter: FilterSettings):
                 }
             };
 
-        case 'Col':
-            return {
-                title: 'Have',
-                field: field,
-                headerTooltip: 'If I have the card or not',
-                responsive: 0,
-                widthGrow: 0.5,
-                visible: visible(field, filter),
-                headerFilter: 'tickCross',
-                formatter: 'tickCross',
-                hozAlign: 'center',
-                mutator: value => {
-                    switch (value) {
-                        case 'x': /* Own */
-                        case 'X': /* Own */
-                        case 'XX': /* Own */
-                        case 'XXX': /* Own */
-                        case 'XXXX': /* Own */
-                        case 'b': /* Bought */
-                        case 'B': /* Bought */
-                            return true;
-
-                        case 'o': /* Want */
-                        case 'O': /* Want */
-                        case '0': /* Want */
-                            return false;
-
-                        default:
-                            return null;
-                    }
-                }
-            };
-
-        case 'Dup':
-            return {
-                title: 'Stock',
-                field: field,
-                headerTooltip: 'The number of cards I have available to trade',
-                responsive: 0,
-                widthGrow: 0.5,
-                visible: visible(field, filter)
-            };
-
-        case 'Cube':
+        case 'Have':
             return {
                 title: field,
                 field: field,
-                headerTooltip: 'The number of cards I have in my playing cube',
+                headerTooltip: 'The number of cards have in my collection',
+                responsive: 0,
+                widthGrow: 0.5,
+                visible: visible(field, filter),
+                headerFilter: 'select',
+                headerFilterParams: {
+                    values: true,
+                    sortValuesList: 'asc'
+                },
+                formatter: cell => haveParser(cell.getData()),
+                accessor: (value, data, type, accessorParams, column, row) => haveParser(data)
+            };
+
+        case 'Trade':
+            return {
+                title: field,
+                field: field,
+                headerTooltip: 'The number of cards I have available to trade',
                 responsive: 0,
                 widthGrow: 0.5,
                 visible: visible(field, filter)
@@ -197,6 +169,21 @@ export function column(fields: string[], field: string, filter: FilterSettings):
 
 function cardNumberFormater(cell: Tabulator.CellComponent): string {
     return cell.getData()['Printed #'];
+}
+
+function cardNumberAccessor(
+    value: any,
+    data: any,
+    type: 'data' | 'download' | 'clipboard',
+    accessorParams: any,
+    column?: Tabulator.ColumnComponent,
+    row?: Tabulator.RowComponent,
+): string {
+    return data['Printed #'];
+}
+
+function haveParser(data: any): string {
+    return data['Have'].toString() + ' of ' + data['Want'].toString();
 }
 
 function visible(field: string, filter: FilterSettings): boolean {

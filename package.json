@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@types/papaparse": "5.2.6",
-    "@types/tabulator-tables": "4.9.3",
+    "@types/tabulator-tables": "5.1.0",
     "papaparse": "5.3.0",
-    "tabulator-tables": "4.9.3"
+    "tabulator-tables": "5.1.0"
   },
   "devDependencies": {
     "puppeteer": "10.2.0"
