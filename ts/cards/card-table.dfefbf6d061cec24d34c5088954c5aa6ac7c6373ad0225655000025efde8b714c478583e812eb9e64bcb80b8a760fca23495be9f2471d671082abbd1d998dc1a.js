@@ -31,33 +31,33 @@
         var f = typeof self != "undefined" ? self : typeof window != "undefined" ? window : f !== void 0 ? f : {};
         var n = !f.document && !!f.postMessage, o = n && /blob:/i.test((f.location || {}).protocol), a = {}, h = 0, b = { parse: function(e, t) {
           var i3 = (t = t || {}).dynamicTyping || false;
-          U(i3) && (t.dynamicTypingFunction = i3, i3 = {});
-          if (t.dynamicTyping = i3, t.transform = !!U(t.transform) && t.transform, t.worker && b.WORKERS_SUPPORTED) {
+          M(i3) && (t.dynamicTypingFunction = i3, i3 = {});
+          if (t.dynamicTyping = i3, t.transform = !!M(t.transform) && t.transform, t.worker && b.WORKERS_SUPPORTED) {
             var r = function() {
               if (!b.WORKERS_SUPPORTED)
                 return false;
               var e2 = (i4 = f.URL || f.webkitURL || null, r2 = s.toString(), b.BLOB_URL || (b.BLOB_URL = i4.createObjectURL(new Blob(["(", r2, ")();"], { type: "text/javascript" })))), t2 = new f.Worker(e2);
               var i4, r2;
-              return t2.onmessage = m, t2.id = h++, a[t2.id] = t2;
+              return t2.onmessage = _, t2.id = h++, a[t2.id] = t2;
             }();
-            return r.userStep = t.step, r.userChunk = t.chunk, r.userComplete = t.complete, r.userError = t.error, t.step = U(t.step), t.chunk = U(t.chunk), t.complete = U(t.complete), t.error = U(t.error), delete t.worker, void r.postMessage({ input: e, config: t, workerId: r.id });
+            return r.userStep = t.step, r.userChunk = t.chunk, r.userComplete = t.complete, r.userError = t.error, t.step = M(t.step), t.chunk = M(t.chunk), t.complete = M(t.complete), t.error = M(t.error), delete t.worker, void r.postMessage({ input: e, config: t, workerId: r.id });
           }
           var n2 = null;
-          b.NODE_STREAM_INPUT, typeof e == "string" ? n2 = t.download ? new l(t) : new p(t) : e.readable === true && U(e.read) && U(e.on) ? n2 = new g(t) : (f.File && e instanceof File || e instanceof Object) && (n2 = new c(t));
+          b.NODE_STREAM_INPUT, typeof e == "string" ? n2 = t.download ? new l(t) : new p(t) : e.readable === true && M(e.read) && M(e.on) ? n2 = new g(t) : (f.File && e instanceof File || e instanceof Object) && (n2 = new c(t));
           return n2.stream(e);
         }, unparse: function(e, t) {
-          var n2 = false, m2 = true, _2 = ",", v2 = "\r\n", s2 = '"', a2 = s2 + s2, i3 = false, r = null, o2 = false;
+          var n2 = false, _2 = true, m2 = ",", y2 = "\r\n", s2 = '"', a2 = s2 + s2, i3 = false, r = null, o2 = false;
           !function() {
             if (typeof t != "object")
               return;
             typeof t.delimiter != "string" || b.BAD_DELIMITERS.filter(function(e2) {
               return t.delimiter.indexOf(e2) !== -1;
-            }).length || (_2 = t.delimiter);
+            }).length || (m2 = t.delimiter);
             (typeof t.quotes == "boolean" || typeof t.quotes == "function" || Array.isArray(t.quotes)) && (n2 = t.quotes);
             typeof t.skipEmptyLines != "boolean" && typeof t.skipEmptyLines != "string" || (i3 = t.skipEmptyLines);
-            typeof t.newline == "string" && (v2 = t.newline);
+            typeof t.newline == "string" && (y2 = t.newline);
             typeof t.quoteChar == "string" && (s2 = t.quoteChar);
-            typeof t.header == "boolean" && (m2 = t.header);
+            typeof t.header == "boolean" && (_2 = t.header);
             if (Array.isArray(t.columns)) {
               if (t.columns.length === 0)
                 throw new Error("Option columns is empty");
@@ -66,35 +66,27 @@
             t.escapeChar !== void 0 && (a2 = t.escapeChar + s2);
             typeof t.escapeFormulae == "boolean" && (o2 = t.escapeFormulae);
           }();
-          var h2 = new RegExp(q(s2), "g");
+          var h2 = new RegExp(j(s2), "g");
           typeof e == "string" && (e = JSON.parse(e));
           if (Array.isArray(e)) {
             if (!e.length || Array.isArray(e[0]))
-              return f2(null, e, i3);
+              return u2(null, e, i3);
             if (typeof e[0] == "object")
-              return f2(r || u2(e[0]), e, i3);
+              return u2(r || Object.keys(e[0]), e, i3);
           } else if (typeof e == "object")
-            return typeof e.data == "string" && (e.data = JSON.parse(e.data)), Array.isArray(e.data) && (e.fields || (e.fields = e.meta && e.meta.fields), e.fields || (e.fields = Array.isArray(e.data[0]) ? e.fields : u2(e.data[0])), Array.isArray(e.data[0]) || typeof e.data[0] == "object" || (e.data = [e.data])), f2(e.fields || [], e.data || [], i3);
+            return typeof e.data == "string" && (e.data = JSON.parse(e.data)), Array.isArray(e.data) && (e.fields || (e.fields = e.meta && e.meta.fields), e.fields || (e.fields = Array.isArray(e.data[0]) ? e.fields : typeof e.data[0] == "object" ? Object.keys(e.data[0]) : []), Array.isArray(e.data[0]) || typeof e.data[0] == "object" || (e.data = [e.data])), u2(e.fields || [], e.data || [], i3);
           throw new Error("Unable to serialize unrecognized input");
-          function u2(e2) {
-            if (typeof e2 != "object")
-              return [];
-            var t2 = [];
-            for (var i4 in e2)
-              t2.push(i4);
-            return t2;
-          }
-          function f2(e2, t2, i4) {
+          function u2(e2, t2, i4) {
             var r2 = "";
             typeof e2 == "string" && (e2 = JSON.parse(e2)), typeof t2 == "string" && (t2 = JSON.parse(t2));
             var n3 = Array.isArray(e2) && 0 < e2.length, s3 = !Array.isArray(t2[0]);
-            if (n3 && m2) {
+            if (n3 && _2) {
               for (var a3 = 0; a3 < e2.length; a3++)
-                0 < a3 && (r2 += _2), r2 += y2(e2[a3], a3);
-              0 < t2.length && (r2 += v2);
+                0 < a3 && (r2 += m2), r2 += v2(e2[a3], a3);
+              0 < t2.length && (r2 += y2);
             }
             for (var o3 = 0; o3 < t2.length; o3++) {
-              var h3 = n3 ? e2.length : t2[o3].length, u3 = false, f3 = n3 ? Object.keys(t2[o3]).length === 0 : t2[o3].length === 0;
+              var h3 = n3 ? e2.length : t2[o3].length, u3 = false, f2 = n3 ? Object.keys(t2[o3]).length === 0 : t2[o3].length === 0;
               if (i4 && !n3 && (u3 = i4 === "greedy" ? t2[o3].join("").trim() === "" : t2[o3].length === 1 && t2[o3][0].length === 0), i4 === "greedy" && n3) {
                 for (var d2 = [], l2 = 0; l2 < h3; l2++) {
                   var c2 = s3 ? e2[l2] : l2;
@@ -104,16 +96,16 @@
               }
               if (!u3) {
                 for (var p2 = 0; p2 < h3; p2++) {
-                  0 < p2 && !f3 && (r2 += _2);
+                  0 < p2 && !f2 && (r2 += m2);
                   var g2 = n3 && s3 ? e2[p2] : p2;
-                  r2 += y2(t2[o3][g2], p2);
+                  r2 += v2(t2[o3][g2], p2);
                 }
-                o3 < t2.length - 1 && (!i4 || 0 < h3 && !f3) && (r2 += v2);
+                o3 < t2.length - 1 && (!i4 || 0 < h3 && !f2) && (r2 += y2);
               }
             }
             return r2;
           }
-          function y2(e2, t2) {
+          function v2(e2, t2) {
             if (e2 == null)
               return "";
             if (e2.constructor === Date)
@@ -124,11 +116,11 @@
                 if (-1 < e3.indexOf(t3[i5]))
                   return true;
               return false;
-            }(i4, b.BAD_DELIMITERS) || -1 < i4.indexOf(_2) || i4.charAt(0) === " " || i4.charAt(i4.length - 1) === " ";
+            }(i4, b.BAD_DELIMITERS) || -1 < i4.indexOf(m2) || i4.charAt(0) === " " || i4.charAt(i4.length - 1) === " ";
             return r2 ? s2 + i4 + s2 : i4;
           }
         } };
-        if (b.RECORD_SEP = String.fromCharCode(30), b.UNIT_SEP = String.fromCharCode(31), b.BYTE_ORDER_MARK = "\uFEFF", b.BAD_DELIMITERS = ["\r", "\n", '"', b.BYTE_ORDER_MARK], b.WORKERS_SUPPORTED = !n && !!f.Worker, b.NODE_STREAM_INPUT = 1, b.LocalChunkSize = 10485760, b.RemoteChunkSize = 5242880, b.DefaultDelimiter = ",", b.Parser = w, b.ParserHandle = i2, b.NetworkStreamer = l, b.FileStreamer = c, b.StringStreamer = p, b.ReadableStreamStreamer = g, f.jQuery) {
+        if (b.RECORD_SEP = String.fromCharCode(30), b.UNIT_SEP = String.fromCharCode(31), b.BYTE_ORDER_MARK = "\uFEFF", b.BAD_DELIMITERS = ["\r", "\n", '"', b.BYTE_ORDER_MARK], b.WORKERS_SUPPORTED = !n && !!f.Worker, b.NODE_STREAM_INPUT = 1, b.LocalChunkSize = 10485760, b.RemoteChunkSize = 5242880, b.DefaultDelimiter = ",", b.Parser = E, b.ParserHandle = i2, b.NetworkStreamer = l, b.FileStreamer = c, b.StringStreamer = p, b.ReadableStreamStreamer = g, f.jQuery) {
           var d = f.jQuery;
           d.fn.parse = function(o2) {
             var i3 = o2.config || {}, h2 = [];
@@ -141,11 +133,11 @@
             function e() {
               if (h2.length !== 0) {
                 var e2, t, i4, r, n2 = h2[0];
-                if (U(o2.before)) {
+                if (M(o2.before)) {
                   var s2 = o2.before(n2.file, n2.inputElem);
                   if (typeof s2 == "object") {
                     if (s2.action === "abort")
-                      return e2 = "AbortError", t = n2.file, i4 = n2.inputElem, r = s2.reason, void (U(o2.error) && o2.error({ name: e2 }, t, i4, r));
+                      return e2 = "AbortError", t = n2.file, i4 = n2.inputElem, r = s2.reason, void (M(o2.error) && o2.error({ name: e2 }, t, i4, r));
                     if (s2.action === "skip")
                       return void u2();
                     typeof s2.config == "object" && (n2.instanceConfig = d.extend(n2.instanceConfig, s2.config));
@@ -154,10 +146,10 @@
                 }
                 var a2 = n2.instanceConfig.complete;
                 n2.instanceConfig.complete = function(e3) {
-                  U(a2) && a2(e3, n2.file, n2.inputElem), u2();
+                  M(a2) && a2(e3, n2.file, n2.inputElem), u2();
                 }, b.parse(n2.file, n2.instanceConfig);
               } else
-                U(o2.complete) && o2.complete();
+                M(o2.complete) && o2.complete();
             }
             function u2() {
               h2.splice(0, 1), e();
@@ -166,11 +158,11 @@
         }
         function u(e) {
           this._handle = null, this._finished = false, this._completed = false, this._halted = false, this._input = null, this._baseIndex = 0, this._partialLine = "", this._rowCount = 0, this._start = 0, this._nextChunk = null, this.isFirstChunk = true, this._completeResults = { data: [], errors: [], meta: {} }, function(e2) {
-            var t = E(e2);
+            var t = w(e2);
             t.chunkSize = parseInt(t.chunkSize), e2.step || e2.chunk || (t.chunkSize = null);
             this._handle = new i2(t), (this._handle.streamer = this)._config = t;
           }.call(this, e), this.parseChunk = function(e2, t) {
-            if (this.isFirstChunk && U(this._config.beforeFirstChunk)) {
+            if (this.isFirstChunk && M(this._config.beforeFirstChunk)) {
               var i3 = this._config.beforeFirstChunk(e2);
               i3 !== void 0 && (e2 = i3);
             }
@@ -184,16 +176,16 @@
               var a2 = this._finished || this._config.preview && this._rowCount >= this._config.preview;
               if (o)
                 f.postMessage({ results: n2, workerId: b.WORKER_ID, finished: a2 });
-              else if (U(this._config.chunk) && !t) {
+              else if (M(this._config.chunk) && !t) {
                 if (this._config.chunk(n2, this._handle), this._handle.paused() || this._handle.aborted())
                   return void (this._halted = true);
                 n2 = void 0, this._completeResults = void 0;
               }
-              return this._config.step || this._config.chunk || (this._completeResults.data = this._completeResults.data.concat(n2.data), this._completeResults.errors = this._completeResults.errors.concat(n2.errors), this._completeResults.meta = n2.meta), this._completed || !a2 || !U(this._config.complete) || n2 && n2.meta.aborted || (this._config.complete(this._completeResults, this._input), this._completed = true), a2 || n2 && n2.meta.paused || this._nextChunk(), n2;
+              return this._config.step || this._config.chunk || (this._completeResults.data = this._completeResults.data.concat(n2.data), this._completeResults.errors = this._completeResults.errors.concat(n2.errors), this._completeResults.meta = n2.meta), this._completed || !a2 || !M(this._config.complete) || n2 && n2.meta.aborted || (this._config.complete(this._completeResults, this._input), this._completed = true), a2 || n2 && n2.meta.paused || this._nextChunk(), n2;
             }
             this._halted = true;
           }, this._sendError = function(e2) {
-            U(this._config.error) ? this._config.error(e2) : o && this._config.error && f.postMessage({ workerId: b.WORKER_ID, error: e2, finished: false });
+            M(this._config.error) ? this._config.error(e2) : o && this._config.error && f.postMessage({ workerId: b.WORKER_ID, error: e2, finished: false });
           };
         }
         function l(e) {
@@ -208,7 +200,7 @@
             if (this._finished)
               this._chunkLoaded();
             else {
-              if (r = new XMLHttpRequest(), this._config.withCredentials && (r.withCredentials = this._config.withCredentials), n || (r.onload = y(this._chunkLoaded, this), r.onerror = y(this._chunkError, this)), r.open(this._config.downloadRequestBody ? "POST" : "GET", this._input, !n), this._config.downloadRequestHeaders) {
+              if (r = new XMLHttpRequest(), this._config.withCredentials && (r.withCredentials = this._config.withCredentials), n || (r.onload = v(this._chunkLoaded, this), r.onerror = v(this._chunkError, this)), r.open(this._config.downloadRequestBody ? "POST" : "GET", this._input, !n), this._config.downloadRequestHeaders) {
                 var e2 = this._config.downloadRequestHeaders;
                 for (var t in e2)
                   r.setRequestHeader(t, e2[t]);
@@ -241,7 +233,7 @@
           (e = e || {}).chunkSize || (e.chunkSize = b.LocalChunkSize), u.call(this, e);
           var s2 = typeof FileReader != "undefined";
           this.stream = function(e2) {
-            this._input = e2, n2 = e2.slice || e2.webkitSlice || e2.mozSlice, s2 ? ((r = new FileReader()).onload = y(this._chunkLoaded, this), r.onerror = y(this._chunkError, this)) : r = new FileReaderSync(), this._nextChunk();
+            this._input = e2, n2 = e2.slice || e2.webkitSlice || e2.mozSlice, s2 ? ((r = new FileReader()).onload = v(this._chunkLoaded, this), r.onerror = v(this._chunkError, this)) : r = new FileReaderSync(), this._nextChunk();
           }, this._nextChunk = function() {
             this._finished || this._config.preview && !(this._rowCount < this._config.preview) || this._readChunk();
           }, this._readChunk = function() {
@@ -282,75 +274,75 @@
             r && t.length === 1 && (this._finished = true);
           }, this._nextChunk = function() {
             this._checkIsFinished(), t.length ? this.parseChunk(t.shift()) : i3 = true;
-          }, this._streamData = y(function(e2) {
+          }, this._streamData = v(function(e2) {
             try {
               t.push(typeof e2 == "string" ? e2 : e2.toString(this._config.encoding)), i3 && (i3 = false, this._checkIsFinished(), this.parseChunk(t.shift()));
             } catch (e3) {
               this._streamError(e3);
             }
-          }, this), this._streamError = y(function(e2) {
+          }, this), this._streamError = v(function(e2) {
             this._streamCleanUp(), this._sendError(e2);
-          }, this), this._streamEnd = y(function() {
+          }, this), this._streamEnd = v(function() {
             this._streamCleanUp(), r = true, this._streamData("");
-          }, this), this._streamCleanUp = y(function() {
+          }, this), this._streamCleanUp = v(function() {
             this._input.removeListener("data", this._streamData), this._input.removeListener("end", this._streamEnd), this._input.removeListener("error", this._streamError);
           }, this);
         }
-        function i2(_2) {
-          var a2, o2, h2, r = Math.pow(2, 53), n2 = -r, s2 = /^\s*-?(\d+\.?|\.\d+|\d+\.\d+)(e[-+]?\d+)?\s*$/, u2 = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/, t = this, i3 = 0, f2 = 0, d2 = false, e = false, l2 = [], c2 = { data: [], errors: [], meta: {} };
-          if (U(_2.step)) {
-            var p2 = _2.step;
-            _2.step = function(e2) {
-              if (c2 = e2, m2())
+        function i2(m2) {
+          var a2, o2, h2, r = Math.pow(2, 53), n2 = -r, s2 = /^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/, u2 = /^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/, t = this, i3 = 0, f2 = 0, d2 = false, e = false, l2 = [], c2 = { data: [], errors: [], meta: {} };
+          if (M(m2.step)) {
+            var p2 = m2.step;
+            m2.step = function(e2) {
+              if (c2 = e2, _2())
                 g2();
               else {
                 if (g2(), c2.data.length === 0)
                   return;
-                i3 += e2.data.length, _2.preview && i3 > _2.preview ? o2.abort() : (c2.data = c2.data[0], p2(c2, t));
+                i3 += e2.data.length, m2.preview && i3 > m2.preview ? o2.abort() : (c2.data = c2.data[0], p2(c2, t));
               }
             };
           }
-          function v2(e2) {
-            return _2.skipEmptyLines === "greedy" ? e2.join("").trim() === "" : e2.length === 1 && e2[0].length === 0;
+          function y2(e2) {
+            return m2.skipEmptyLines === "greedy" ? e2.join("").trim() === "" : e2.length === 1 && e2[0].length === 0;
           }
           function g2() {
-            if (c2 && h2 && (k("Delimiter", "UndetectableDelimiter", "Unable to auto-detect delimiting character; defaulted to '" + b.DefaultDelimiter + "'"), h2 = false), _2.skipEmptyLines)
+            if (c2 && h2 && (k("Delimiter", "UndetectableDelimiter", "Unable to auto-detect delimiting character; defaulted to '" + b.DefaultDelimiter + "'"), h2 = false), m2.skipEmptyLines)
               for (var e2 = 0; e2 < c2.data.length; e2++)
-                v2(c2.data[e2]) && c2.data.splice(e2--, 1);
-            return m2() && function() {
+                y2(c2.data[e2]) && c2.data.splice(e2--, 1);
+            return _2() && function() {
               if (!c2)
                 return;
               function e3(e4, t3) {
-                U(_2.transformHeader) && (e4 = _2.transformHeader(e4, t3)), l2.push(e4);
+                M(m2.transformHeader) && (e4 = m2.transformHeader(e4, t3)), l2.push(e4);
               }
               if (Array.isArray(c2.data[0])) {
-                for (var t2 = 0; m2() && t2 < c2.data.length; t2++)
+                for (var t2 = 0; _2() && t2 < c2.data.length; t2++)
                   c2.data[t2].forEach(e3);
                 c2.data.splice(0, 1);
               } else
                 c2.data.forEach(e3);
             }(), function() {
-              if (!c2 || !_2.header && !_2.dynamicTyping && !_2.transform)
+              if (!c2 || !m2.header && !m2.dynamicTyping && !m2.transform)
                 return c2;
               function e3(e4, t3) {
-                var i4, r2 = _2.header ? {} : [];
+                var i4, r2 = m2.header ? {} : [];
                 for (i4 = 0; i4 < e4.length; i4++) {
                   var n3 = i4, s3 = e4[i4];
-                  _2.header && (n3 = i4 >= l2.length ? "__parsed_extra" : l2[i4]), _2.transform && (s3 = _2.transform(s3, n3)), s3 = y2(n3, s3), n3 === "__parsed_extra" ? (r2[n3] = r2[n3] || [], r2[n3].push(s3)) : r2[n3] = s3;
+                  m2.header && (n3 = i4 >= l2.length ? "__parsed_extra" : l2[i4]), m2.transform && (s3 = m2.transform(s3, n3)), s3 = v2(n3, s3), n3 === "__parsed_extra" ? (r2[n3] = r2[n3] || [], r2[n3].push(s3)) : r2[n3] = s3;
                 }
-                return _2.header && (i4 > l2.length ? k("FieldMismatch", "TooManyFields", "Too many fields: expected " + l2.length + " fields but parsed " + i4, f2 + t3) : i4 < l2.length && k("FieldMismatch", "TooFewFields", "Too few fields: expected " + l2.length + " fields but parsed " + i4, f2 + t3)), r2;
+                return m2.header && (i4 > l2.length ? k("FieldMismatch", "TooManyFields", "Too many fields: expected " + l2.length + " fields but parsed " + i4, f2 + t3) : i4 < l2.length && k("FieldMismatch", "TooFewFields", "Too few fields: expected " + l2.length + " fields but parsed " + i4, f2 + t3)), r2;
               }
               var t2 = 1;
               !c2.data.length || Array.isArray(c2.data[0]) ? (c2.data = c2.data.map(e3), t2 = c2.data.length) : c2.data = e3(c2.data, 0);
-              _2.header && c2.meta && (c2.meta.fields = l2);
+              m2.header && c2.meta && (c2.meta.fields = l2);
               return f2 += t2, c2;
             }();
           }
-          function m2() {
-            return _2.header && l2.length === 0;
+          function _2() {
+            return m2.header && l2.length === 0;
           }
-          function y2(e2, t2) {
-            return i4 = e2, _2.dynamicTypingFunction && _2.dynamicTyping[i4] === void 0 && (_2.dynamicTyping[i4] = _2.dynamicTypingFunction(i4)), (_2.dynamicTyping[i4] || _2.dynamicTyping) === true ? t2 === "true" || t2 === "TRUE" || t2 !== "false" && t2 !== "FALSE" && (function(e3) {
+          function v2(e2, t2) {
+            return i4 = e2, m2.dynamicTypingFunction && m2.dynamicTyping[i4] === void 0 && (m2.dynamicTyping[i4] = m2.dynamicTypingFunction(i4)), (m2.dynamicTyping[i4] || m2.dynamicTyping) === true ? t2 === "true" || t2 === "TRUE" || t2 !== "false" && t2 !== "FALSE" && (function(e3) {
               if (s2.test(e3)) {
                 var t3 = parseFloat(e3);
                 if (n2 < t3 && t3 < r)
@@ -365,17 +357,17 @@
             r2 !== void 0 && (n3.row = r2), c2.errors.push(n3);
           }
           this.parse = function(e2, t2, i4) {
-            var r2 = _2.quoteChar || '"';
-            if (_2.newline || (_2.newline = function(e3, t3) {
+            var r2 = m2.quoteChar || '"';
+            if (m2.newline || (m2.newline = function(e3, t3) {
               e3 = e3.substring(0, 1048576);
-              var i5 = new RegExp(q(t3) + "([^]*?)" + q(t3), "gm"), r3 = (e3 = e3.replace(i5, "")).split("\r"), n4 = e3.split("\n"), s4 = 1 < n4.length && n4[0].length < r3[0].length;
+              var i5 = new RegExp(j(t3) + "([^]*?)" + j(t3), "gm"), r3 = (e3 = e3.replace(i5, "")).split("\r"), n4 = e3.split("\n"), s4 = 1 < n4.length && n4[0].length < r3[0].length;
               if (r3.length === 1 || s4)
                 return "\n";
               for (var a3 = 0, o3 = 0; o3 < r3.length; o3++)
                 r3[o3][0] === "\n" && a3++;
               return a3 >= r3.length / 2 ? "\r\n" : "\r";
-            }(e2, r2)), h2 = false, _2.delimiter)
-              U(_2.delimiter) && (_2.delimiter = _2.delimiter(e2), c2.meta.delimiter = _2.delimiter);
+            }(e2, r2)), h2 = false, m2.delimiter)
+              M(m2.delimiter) && (m2.delimiter = m2.delimiter(e2), c2.meta.delimiter = m2.delimiter);
             else {
               var n3 = function(e3, t3, i5, r3, n4) {
                 var s4, a3, o3, h3;
@@ -383,197 +375,177 @@
                 for (var u3 = 0; u3 < n4.length; u3++) {
                   var f3 = n4[u3], d3 = 0, l3 = 0, c3 = 0;
                   o3 = void 0;
-                  for (var p3 = new w({ comments: r3, delimiter: f3, newline: t3, preview: 10 }).parse(e3), g3 = 0; g3 < p3.data.length; g3++)
-                    if (i5 && v2(p3.data[g3]))
+                  for (var p3 = new E({ comments: r3, delimiter: f3, newline: t3, preview: 10 }).parse(e3), g3 = 0; g3 < p3.data.length; g3++)
+                    if (i5 && y2(p3.data[g3]))
                       c3++;
                     else {
-                      var m3 = p3.data[g3].length;
-                      l3 += m3, o3 !== void 0 ? 0 < m3 && (d3 += Math.abs(m3 - o3), o3 = m3) : o3 = m3;
+                      var _3 = p3.data[g3].length;
+                      l3 += _3, o3 !== void 0 ? 0 < _3 && (d3 += Math.abs(_3 - o3), o3 = _3) : o3 = _3;
                     }
                   0 < p3.data.length && (l3 /= p3.data.length - c3), (a3 === void 0 || d3 <= a3) && (h3 === void 0 || h3 < l3) && 1.99 < l3 && (a3 = d3, s4 = f3, h3 = l3);
                 }
-                return { successful: !!(_2.delimiter = s4), bestDelimiter: s4 };
-              }(e2, _2.newline, _2.skipEmptyLines, _2.comments, _2.delimitersToGuess);
-              n3.successful ? _2.delimiter = n3.bestDelimiter : (h2 = true, _2.delimiter = b.DefaultDelimiter), c2.meta.delimiter = _2.delimiter;
+                return { successful: !!(m2.delimiter = s4), bestDelimiter: s4 };
+              }(e2, m2.newline, m2.skipEmptyLines, m2.comments, m2.delimitersToGuess);
+              n3.successful ? m2.delimiter = n3.bestDelimiter : (h2 = true, m2.delimiter = b.DefaultDelimiter), c2.meta.delimiter = m2.delimiter;
             }
-            var s3 = E(_2);
-            return _2.preview && _2.header && s3.preview++, a2 = e2, o2 = new w(s3), c2 = o2.parse(a2, t2, i4), g2(), d2 ? { meta: { paused: true } } : c2 || { meta: { paused: false } };
+            var s3 = w(m2);
+            return m2.preview && m2.header && s3.preview++, a2 = e2, o2 = new E(s3), c2 = o2.parse(a2, t2, i4), g2(), d2 ? { meta: { paused: true } } : c2 || { meta: { paused: false } };
           }, this.paused = function() {
             return d2;
           }, this.pause = function() {
-            d2 = true, o2.abort(), a2 = U(_2.chunk) ? "" : a2.substring(o2.getCharIndex());
+            d2 = true, o2.abort(), a2 = M(m2.chunk) ? "" : a2.substring(o2.getCharIndex());
           }, this.resume = function() {
             t.streamer._halted ? (d2 = false, t.streamer.parseChunk(a2, true)) : setTimeout(t.resume, 3);
           }, this.aborted = function() {
             return e;
           }, this.abort = function() {
-            e = true, o2.abort(), c2.meta.aborted = true, U(_2.complete) && _2.complete(c2), a2 = "";
+            e = true, o2.abort(), c2.meta.aborted = true, M(m2.complete) && m2.complete(c2), a2 = "";
           };
         }
-        function q(e) {
+        function j(e) {
           return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         }
-        function w(e) {
-          var O, D = (e = e || {}).delimiter, I = e.newline, T = e.comments, A = e.step, L = e.preview, F = e.fastMode, z = O = e.quoteChar === void 0 ? '"' : e.quoteChar;
-          if (e.escapeChar !== void 0 && (z = e.escapeChar), (typeof D != "string" || -1 < b.BAD_DELIMITERS.indexOf(D)) && (D = ","), T === D)
+        function E(e) {
+          var S, O = (e = e || {}).delimiter, x = e.newline, I = e.comments, T = e.step, D = e.preview, A = e.fastMode, L = S = e.quoteChar === void 0 ? '"' : e.quoteChar;
+          if (e.escapeChar !== void 0 && (L = e.escapeChar), (typeof O != "string" || -1 < b.BAD_DELIMITERS.indexOf(O)) && (O = ","), I === O)
             throw new Error("Comment character same as delimiter");
-          T === true ? T = "#" : (typeof T != "string" || -1 < b.BAD_DELIMITERS.indexOf(T)) && (T = false), I !== "\n" && I !== "\r" && I !== "\r\n" && (I = "\n");
-          var M = 0, j = false;
-          this.parse = function(a2, t, i3) {
-            if (typeof a2 != "string")
+          I === true ? I = "#" : (typeof I != "string" || -1 < b.BAD_DELIMITERS.indexOf(I)) && (I = false), x !== "\n" && x !== "\r" && x !== "\r\n" && (x = "\n");
+          var F = 0, z = false;
+          this.parse = function(r, t, i3) {
+            if (typeof r != "string")
               throw new Error("Input must be a string");
-            var r = a2.length, e2 = D.length, n2 = I.length, s2 = T.length, o2 = U(A), h2 = [], u2 = [], f2 = [], d2 = M = 0;
-            if (!a2)
-              return R();
-            if (F || F !== false && a2.indexOf(O) === -1) {
-              for (var l2 = a2.split(I), c2 = 0; c2 < l2.length; c2++) {
-                if (f2 = l2[c2], M += f2.length, c2 !== l2.length - 1)
-                  M += I.length;
+            var n2 = r.length, e2 = O.length, s2 = x.length, a2 = I.length, o2 = M(T), h2 = [], u2 = [], f2 = [], d2 = F = 0;
+            if (!r)
+              return C();
+            if (A || A !== false && r.indexOf(S) === -1) {
+              for (var l2 = r.split(x), c2 = 0; c2 < l2.length; c2++) {
+                if (f2 = l2[c2], F += f2.length, c2 !== l2.length - 1)
+                  F += x.length;
                 else if (i3)
-                  return R();
-                if (!T || f2.substring(0, s2) !== T) {
+                  return C();
+                if (!I || f2.substring(0, a2) !== I) {
                   if (o2) {
-                    if (h2 = [], b2(f2.split(D)), S(), j)
-                      return R();
+                    if (h2 = [], k(f2.split(O)), R(), z)
+                      return C();
                   } else
-                    b2(f2.split(D));
-                  if (L && L <= c2)
-                    return h2 = h2.slice(0, L), R(true);
+                    k(f2.split(O));
+                  if (D && D <= c2)
+                    return h2 = h2.slice(0, D), C(true);
                 }
               }
-              return R();
+              return C();
             }
-            for (var p2 = a2.indexOf(D, M), g2 = a2.indexOf(I, M), m2 = new RegExp(q(z) + q(O), "g"), _2 = a2.indexOf(O, M); ; )
-              if (a2[M] !== O)
-                if (T && f2.length === 0 && a2.substring(M, M + s2) === T) {
+            for (var p2 = r.indexOf(O, F), g2 = r.indexOf(x, F), _2 = new RegExp(j(L) + j(S), "g"), m2 = r.indexOf(S, F); ; )
+              if (r[F] !== S)
+                if (I && f2.length === 0 && r.substring(F, F + a2) === I) {
                   if (g2 === -1)
-                    return R();
-                  M = g2 + n2, g2 = a2.indexOf(I, M), p2 = a2.indexOf(D, M);
-                } else {
-                  if (p2 !== -1 && (p2 < g2 || g2 === -1)) {
-                    if (!(p2 < _2)) {
-                      f2.push(a2.substring(M, p2)), M = p2 + e2, p2 = a2.indexOf(D, M);
-                      continue;
-                    }
-                    var v2 = x(p2, _2, g2);
-                    if (v2 && v2.nextDelim !== void 0) {
-                      p2 = v2.nextDelim, _2 = v2.quoteSearch, f2.push(a2.substring(M, p2)), M = p2 + e2, p2 = a2.indexOf(D, M);
-                      continue;
-                    }
-                  }
+                    return C();
+                  F = g2 + s2, g2 = r.indexOf(x, F), p2 = r.indexOf(O, F);
+                } else if (p2 !== -1 && (p2 < g2 || g2 === -1))
+                  f2.push(r.substring(F, p2)), F = p2 + e2, p2 = r.indexOf(O, F);
+                else {
                   if (g2 === -1)
                     break;
-                  if (f2.push(a2.substring(M, g2)), C(g2 + n2), o2 && (S(), j))
-                    return R();
-                  if (L && h2.length >= L)
-                    return R(true);
+                  if (f2.push(r.substring(F, g2)), w2(g2 + s2), o2 && (R(), z))
+                    return C();
+                  if (D && h2.length >= D)
+                    return C(true);
                 }
               else
-                for (_2 = M, M++; ; ) {
-                  if ((_2 = a2.indexOf(O, _2 + 1)) === -1)
-                    return i3 || u2.push({ type: "Quotes", code: "MissingQuotes", message: "Quoted field unterminated", row: h2.length, index: M }), E2();
-                  if (_2 === r - 1)
-                    return E2(a2.substring(M, _2).replace(m2, O));
-                  if (O !== z || a2[_2 + 1] !== z) {
-                    if (O === z || _2 === 0 || a2[_2 - 1] !== z) {
-                      p2 !== -1 && p2 < _2 + 1 && (p2 = a2.indexOf(D, _2 + 1)), g2 !== -1 && g2 < _2 + 1 && (g2 = a2.indexOf(I, _2 + 1));
-                      var y2 = w2(g2 === -1 ? p2 : Math.min(p2, g2));
-                      if (a2[_2 + 1 + y2] === D) {
-                        f2.push(a2.substring(M, _2).replace(m2, O)), a2[M = _2 + 1 + y2 + e2] !== O && (_2 = a2.indexOf(O, M)), p2 = a2.indexOf(D, M), g2 = a2.indexOf(I, M);
+                for (m2 = F, F++; ; ) {
+                  if ((m2 = r.indexOf(S, m2 + 1)) === -1)
+                    return i3 || u2.push({ type: "Quotes", code: "MissingQuotes", message: "Quoted field unterminated", row: h2.length, index: F }), E2();
+                  if (m2 === n2 - 1)
+                    return E2(r.substring(F, m2).replace(_2, S));
+                  if (S !== L || r[m2 + 1] !== L) {
+                    if (S === L || m2 === 0 || r[m2 - 1] !== L) {
+                      p2 !== -1 && p2 < m2 + 1 && (p2 = r.indexOf(O, m2 + 1)), g2 !== -1 && g2 < m2 + 1 && (g2 = r.indexOf(x, m2 + 1));
+                      var y2 = b2(g2 === -1 ? p2 : Math.min(p2, g2));
+                      if (r[m2 + 1 + y2] === O) {
+                        f2.push(r.substring(F, m2).replace(_2, S)), r[F = m2 + 1 + y2 + e2] !== S && (m2 = r.indexOf(S, F)), p2 = r.indexOf(O, F), g2 = r.indexOf(x, F);
                         break;
                       }
-                      var k = w2(g2);
-                      if (a2.substring(_2 + 1 + k, _2 + 1 + k + n2) === I) {
-                        if (f2.push(a2.substring(M, _2).replace(m2, O)), C(_2 + 1 + k + n2), p2 = a2.indexOf(D, M), _2 = a2.indexOf(O, M), o2 && (S(), j))
-                          return R();
-                        if (L && h2.length >= L)
-                          return R(true);
+                      var v2 = b2(g2);
+                      if (r.substring(m2 + 1 + v2, m2 + 1 + v2 + s2) === x) {
+                        if (f2.push(r.substring(F, m2).replace(_2, S)), w2(m2 + 1 + v2 + s2), p2 = r.indexOf(O, F), m2 = r.indexOf(S, F), o2 && (R(), z))
+                          return C();
+                        if (D && h2.length >= D)
+                          return C(true);
                         break;
                       }
-                      u2.push({ type: "Quotes", code: "InvalidQuotes", message: "Trailing quote on quoted field is malformed", row: h2.length, index: M }), _2++;
+                      u2.push({ type: "Quotes", code: "InvalidQuotes", message: "Trailing quote on quoted field is malformed", row: h2.length, index: F }), m2++;
                     }
                   } else
-                    _2++;
+                    m2++;
                 }
             return E2();
-            function b2(e3) {
-              h2.push(e3), d2 = M;
+            function k(e3) {
+              h2.push(e3), d2 = F;
             }
-            function w2(e3) {
+            function b2(e3) {
               var t2 = 0;
               if (e3 !== -1) {
-                var i4 = a2.substring(_2 + 1, e3);
+                var i4 = r.substring(m2 + 1, e3);
                 i4 && i4.trim() === "" && (t2 = i4.length);
               }
               return t2;
             }
             function E2(e3) {
-              return i3 || (e3 === void 0 && (e3 = a2.substring(M)), f2.push(e3), M = r, b2(f2), o2 && S()), R();
+              return i3 || (e3 === void 0 && (e3 = r.substring(F)), f2.push(e3), F = n2, k(f2), o2 && R()), C();
+            }
+            function w2(e3) {
+              F = e3, k(f2), f2 = [], g2 = r.indexOf(x, F);
             }
             function C(e3) {
-              M = e3, b2(f2), f2 = [], g2 = a2.indexOf(I, M);
+              return { data: h2, errors: u2, meta: { delimiter: O, linebreak: x, aborted: z, truncated: !!e3, cursor: d2 + (t || 0) } };
             }
-            function R(e3) {
-              return { data: h2, errors: u2, meta: { delimiter: D, linebreak: I, aborted: j, truncated: !!e3, cursor: d2 + (t || 0) } };
-            }
-            function S() {
-              A(R()), h2 = [], u2 = [];
-            }
-            function x(e3, t2, i4) {
-              var r2 = { nextDelim: void 0, quoteSearch: void 0 }, n3 = a2.indexOf(O, t2 + 1);
-              if (t2 < e3 && e3 < n3 && (n3 < i4 || i4 === -1)) {
-                var s3 = a2.indexOf(D, n3);
-                if (s3 === -1)
-                  return r2;
-                n3 < s3 && (n3 = a2.indexOf(O, n3 + 1)), r2 = x(s3, n3, i4);
-              } else
-                r2 = { nextDelim: e3, quoteSearch: t2 };
-              return r2;
+            function R() {
+              T(C()), h2 = [], u2 = [];
             }
           }, this.abort = function() {
-            j = true;
+            z = true;
           }, this.getCharIndex = function() {
-            return M;
+            return F;
           };
         }
-        function m(e) {
+        function _(e) {
           var t = e.data, i3 = a[t.workerId], r = false;
           if (t.error)
             i3.userError(t.error, t.file);
           else if (t.results && t.results.data) {
             var n2 = { abort: function() {
-              r = true, _(t.workerId, { data: [], errors: [], meta: { aborted: true } });
-            }, pause: v, resume: v };
-            if (U(i3.userStep)) {
+              r = true, m(t.workerId, { data: [], errors: [], meta: { aborted: true } });
+            }, pause: y, resume: y };
+            if (M(i3.userStep)) {
               for (var s2 = 0; s2 < t.results.data.length && (i3.userStep({ data: t.results.data[s2], errors: t.results.errors, meta: t.results.meta }, n2), !r); s2++)
                 ;
               delete t.results;
             } else
-              U(i3.userChunk) && (i3.userChunk(t.results, n2, t.file), delete t.results);
+              M(i3.userChunk) && (i3.userChunk(t.results, n2, t.file), delete t.results);
           }
-          t.finished && !r && _(t.workerId, t.results);
+          t.finished && !r && m(t.workerId, t.results);
         }
-        function _(e, t) {
+        function m(e, t) {
           var i3 = a[e];
-          U(i3.userComplete) && i3.userComplete(t), i3.terminate(), delete a[e];
+          M(i3.userComplete) && i3.userComplete(t), i3.terminate(), delete a[e];
         }
-        function v() {
+        function y() {
           throw new Error("Not implemented.");
         }
-        function E(e) {
+        function w(e) {
           if (typeof e != "object" || e === null)
             return e;
           var t = Array.isArray(e) ? [] : {};
           for (var i3 in e)
-            t[i3] = E(e[i3]);
+            t[i3] = w(e[i3]);
           return t;
         }
-        function y(e, t) {
+        function v(e, t) {
           return function() {
             e.apply(t, arguments);
           };
         }
-        function U(e) {
+        function M(e) {
           return typeof e == "function";
         }
         return o && (f.onmessage = function(e) {
@@ -18248,7 +18220,7 @@
 })();
 /* @license
 Papa Parse
-v5.3.0
+v5.3.1
 https://github.com/mholt/PapaParse
 License: MIT
 */
