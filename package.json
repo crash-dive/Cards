@@ -12,9 +12,9 @@
     "url": "git+https://github.com/crash-dive/cards.git"
   },
   "dependencies": {
-    "@types/papaparse": "5.2.6",
+    "@types/papaparse": "5.3.2",
     "@types/tabulator-tables": "5.1.0",
-    "papaparse": "5.3.0",
+    "papaparse": "5.3.1",
     "tabulator-tables": "5.1.0"
   },
   "devDependencies": {
