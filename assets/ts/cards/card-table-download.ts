@@ -11,7 +11,7 @@ export function enable(tablulator: Tabulator): void {
 }
 
 function fileName(): string {
-    const name = document.getElementById('game-name').innerText;
+    const name = document.getElementById('game-name-text').textContent;
     const selectedList = (document.querySelector('#filter input:checked + label') as HTMLLabelElement).innerText;
 
     return `Crash Dive - ${selectedList} List (${name}).csv`;

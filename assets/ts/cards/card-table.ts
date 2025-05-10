@@ -42,8 +42,8 @@ function createTable(table: HTMLTableElement, results: ParseResult<Object[]>): v
         layout: columns.layout(),
         responsiveLayout: 'collapse',
         responsiveLayoutCollapseStartOpen: false,
-        placeholder: "No Results",
-        initialFilter: filterSettings.filter,
+        placeholder: 'No Results',
+        initialFilter: filterSettings.filter as any, //The types and docs do not clearly show that you can pass a function here
         groupBy: columns.groupBy(results.meta.fields),
         groupToggleElement: 'header',
         columns: columns.definition(results.meta.fields, filterSettings),

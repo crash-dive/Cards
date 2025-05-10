@@ -1,4 +1,4 @@
-import type { Tabulator } from 'tabulator-tables';
+import type { Tabulator, Filter } from 'tabulator-tables';
 
 export type FilterType = 
     'want' |
@@ -8,7 +8,7 @@ export type FilterType =
 
 export type FilterSettings = {
     value: FilterType,
-    filter: Tabulator.Filter[] | ((data: any, filterParams: any) => boolean);
+    filter: Filter[] | ((data: any, filterParams: any) => boolean);
     hide: string[];
 };
 
@@ -36,7 +36,7 @@ export function getSettings(filter: FilterType): FilterSettings {
                 value: 'trade',
                 filter: (data: any, filterParams: any) => data.Trade > 0,
                 hide: [
-                    'Have'
+                    'Need'
                 ]
             };
 
@@ -55,7 +55,7 @@ export function enable(tablulator: Tabulator, settings: FilterSettings): void {
                 input.addEventListener('change', () => 
                     run(
                         tablulator, 
-                        input.value as FilterType
+                        getSettings(input.value as FilterType)
                     )
                 );
 
@@ -64,9 +64,7 @@ export function enable(tablulator: Tabulator, settings: FilterSettings): void {
             });
 }
 
-function run(tablulator: Tabulator, filter: FilterType): void {
-    const settings = getSettings(filter);
-
+function run(tablulator: Tabulator, settings: FilterSettings): void {
     //The library has a bug when you mix hidden columns and responsive layouts
     //The responsiveLayout.Update function does not reset this value so we need to
     tablulator.modules.responsiveLayout.index = 0;

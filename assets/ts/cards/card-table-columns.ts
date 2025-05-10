@@ -1,5 +1,5 @@
 import type { FilterSettings } from './card-table-filter'
-import type { Tabulator } from 'tabulator-tables';
+import type { ColumnDefinition, ColumnComponent, CellComponent, RowComponent } from 'tabulator-tables';
 
 export function layout(): 'fitData' | 'fitColumns' {
     if (window.innerWidth >= 1024) {
@@ -20,8 +20,8 @@ export function groupBy(fields: string[]): string {
     }
 }
 
-export function definition(fields: string[], filter: FilterSettings): Tabulator.ColumnDefinition[] {
-    const columns: Tabulator.ColumnDefinition[] = [{
+export function definition(fields: string[], filter: FilterSettings): ColumnDefinition[] {
+    const columns: ColumnDefinition[] = [{
         title: '',
         formatter:"responsiveCollapse",
         responsive: 0,
@@ -39,7 +39,9 @@ export function definition(fields: string[], filter: FilterSettings): Tabulator.
             field === 'Printed #' ||
             field === 'Price Estimate' ||
             field === 'Notes' ||
+            field === 'Have' ||
             field === 'Want'
+
         ) {
             continue;
         }
@@ -48,23 +50,43 @@ export function definition(fields: string[], filter: FilterSettings): Tabulator.
         }
     }
 
+    columns.push({
+        title: 'Need',
+        field: 'Need',
+        download: true,
+        headerTooltip: 'How many I want of that card',
+        responsive: 0,
+        widthGrow: 0.5,
+        visible: visible('Need', filter),
+        headerFilter: 'list',
+        headerFilterParams: {
+            sort: 'asc',
+            valuesLookup: 'all'
+        },
+        sorter: 'alphanum',
+        mutator: (value: any, data: any) => {
+            return data['Have'].toString() + ' of ' + data['Want'].toString();
+        }
+    });
+
     return columns;
 }
 
-export function column(fields: string[], field: string, filter: FilterSettings): Tabulator.ColumnDefinition {
+export function column(fields: string[], field: string, filter: FilterSettings): ColumnDefinition {
     switch (field) {
         case 'Set':
             return {
                 title: field,
                 field: field,
+                download: true,
                 headerTooltip: 'The set that the card belongs to',
                 responsive: 100,
                 widthGrow: 1,
                 visible: visible(field, filter),
-                headerFilter: 'select',
+                headerFilter: 'list',
                 headerFilterParams: {
-                    values: true,
-                    sortValuesList: 'asc'
+                    sort: 'asc',
+                    valuesLookup: 'all'
                 },
                 sorter: function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow.getData()['Set #'] - bRow.getData()['Set #'];
@@ -74,8 +96,9 @@ export function column(fields: string[], field: string, filter: FilterSettings):
         case 'Card #':
             return {
                 title: '#',
-                titleDownload: field,
                 field: field,
+                titleDownload: field,
+                download: true,
                 headerTooltip: 'The number of the card',
                 responsive: 0,
                 widthGrow: 0.5,
@@ -89,6 +112,7 @@ export function column(fields: string[], field: string, filter: FilterSettings):
             return {
                 title: field,
                 field: field,
+                download: true,
                 headerTooltip: 'The card\'s name',
                 responsive: 0,
                 widthGrow: 3,
@@ -112,62 +136,53 @@ export function column(fields: string[], field: string, filter: FilterSettings):
             return {
                 title: field,
                 field: field,
+                download: true,
                 headerTooltip: 'The type or catagory of the card',
                 responsive: 50,
                 widthGrow: 1,
                 visible: visible(field, filter),
-                headerFilter: 'select',
+                headerFilter: 'list',
                 headerFilterParams: {
-                    values: true,
-                    sortValuesList: 'asc'
-                }
+                    sort: 'asc',
+                    valuesLookup: 'all'
+                },
             };
 
         case 'Rarity':
             return {
                 title: field,
                 field: field,
+                download: true,
                 headerTooltip: 'The rarity of the card',
                 responsive: 10,
                 widthGrow: 1,
                 visible: visible(field, filter),
-                headerFilter: 'select',
+                headerFilter: 'list',
                 headerFilterParams: {
-                    values: true,
-                    sortValuesList: 'asc'
+                    sort: 'asc',
+                    valuesLookup: 'all'
                 }
-            };
-
-        case 'Have':
-            return {
-                title: field,
-                field: field,
-                headerTooltip: 'The number of cards have in my collection',
-                responsive: 0,
-                widthGrow: 0.5,
-                visible: visible(field, filter),
-                headerFilter: 'select',
-                headerFilterParams: {
-                    values: true,
-                    sortValuesList: 'asc'
-                },
-                formatter: cell => haveParser(cell.getData()),
-                accessor: (value, data, type, accessorParams, column, row) => haveParser(data)
             };
 
         case 'Trade':
             return {
                 title: field,
                 field: field,
+                download: true,
                 headerTooltip: 'The number of cards I have available to trade',
-                responsive: 0,
+                responsive: 5,
                 widthGrow: 0.5,
-                visible: visible(field, filter)
+                visible: visible(field, filter),
+                headerFilter: 'list',
+                headerFilterParams: {
+                    sort: 'asc',
+                    valuesLookup: 'all'
+                },
             };
     }
 }
 
-function cardNumberFormater(cell: Tabulator.CellComponent): string {
+function cardNumberFormater(cell: CellComponent): string {
     return cell.getData()['Printed #'];
 }
 
@@ -176,14 +191,10 @@ function cardNumberAccessor(
     data: any,
     type: 'data' | 'download' | 'clipboard',
     accessorParams: any,
-    column?: Tabulator.ColumnComponent,
-    row?: Tabulator.RowComponent,
+    column?: ColumnComponent,
+    row?: RowComponent,
 ): string {
     return data['Printed #'];
-}
-
-function haveParser(data: any): string {
-    return data['Have'].toString() + ' of ' + data['Want'].toString();
 }
 
 function visible(field: string, filter: FilterSettings): boolean {
