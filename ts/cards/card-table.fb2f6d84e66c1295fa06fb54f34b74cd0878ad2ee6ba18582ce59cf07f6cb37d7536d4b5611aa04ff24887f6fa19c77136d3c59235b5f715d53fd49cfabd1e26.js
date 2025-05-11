@@ -22571,13 +22571,10 @@
       visible: visible("Need", filter),
       headerFilter: "list",
       headerFilterParams: {
-        sort: "asc",
-        valuesLookup: "all"
+        values: ["Yes", "No"]
       },
       sorter: "alphanum",
-      mutator: (value, data) => {
-        return data["Have"].toString() + " of " + data["Want"].toString();
-      }
+      mutator: (value, data) => data["Have"] < data["Want"] ? "Yes" : "No"
     });
     return columns;
   }
@@ -22597,9 +22594,7 @@
             sort: "asc",
             valuesLookup: "all"
           },
-          sorter: function(a, b, aRow, bRow, column2, dir, sorterParams) {
-            return aRow.getData()["Set #"] - bRow.getData()["Set #"];
-          }
+          sorter: (a, b, aRow, bRow, column2, dir, sorterParams) => aRow.getData()["Set #"] - bRow.getData()["Set #"]
         };
       case "Card #":
         return {
