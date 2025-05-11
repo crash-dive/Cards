@@ -60,13 +60,10 @@ export function definition(fields: string[], filter: FilterSettings): ColumnDefi
         visible: visible('Need', filter),
         headerFilter: 'list',
         headerFilterParams: {
-            sort: 'asc',
-            valuesLookup: 'all'
+            values: ['Yes', 'No']
         },
         sorter: 'alphanum',
-        mutator: (value: any, data: any) => {
-            return data['Have'].toString() + ' of ' + data['Want'].toString();
-        }
+        mutator: (value: any, data: any) =>  data['Have'] < data['Want'] ? 'Yes' : 'No'
     });
 
     return columns;
@@ -88,9 +85,7 @@ export function column(fields: string[], field: string, filter: FilterSettings):
                     sort: 'asc',
                     valuesLookup: 'all'
                 },
-                sorter: function(a, b, aRow, bRow, column, dir, sorterParams){
-                    return aRow.getData()['Set #'] - bRow.getData()['Set #'];
-                }
+                sorter: (a, b, aRow, bRow, column, dir, sorterParams) => aRow.getData()['Set #'] - bRow.getData()['Set #']
             };
     
         case 'Card #':
