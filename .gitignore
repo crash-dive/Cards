@@ -8,6 +8,9 @@ logs/
 resources/
 public/
 
+# Build Files
+.hugo_build.lock
+
 # Package Managers
 packages/
 node_modules/
