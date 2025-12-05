@@ -1,4 +1,4 @@
-baseURL: "http://cards.crashdive.co.uk/"
+baseURL: "https://cards.crashdive.co.uk/"
 title: "Crash Dive - Cards"
 languageCode: "en-GB"
 disableKinds: ["taxonomy", "RSS"]
