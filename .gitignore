@@ -6,6 +6,7 @@ bin/
 obj/
 logs/
 resources/
+public/
 
 # Package Managers
 packages/
