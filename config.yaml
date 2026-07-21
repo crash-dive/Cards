@@ -16,3 +16,5 @@ module:
       target: "static"
     - source: "node_modules/tabulator-tables/dist/css"
       target: "assets/css/tabulator-tables"
+security:
+    allowContent: ['.*']
