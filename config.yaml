@@ -1,6 +1,6 @@
 baseURL: "https://cards.crashdive.co.uk/"
 title: "Crash Dive - Cards"
-languageCode: "en-GB"
+locale: "en-GB"
 disableKinds: ["taxonomy", "RSS"]
 enableRobotsTXT: true
 disableHugoGeneratorInject: true
